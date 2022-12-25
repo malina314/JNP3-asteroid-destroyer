@@ -1,0 +1,10 @@
+#ifndef ASTEROID_DESTROYER_ENGINE_H
+#define ASTEROID_DESTROYER_ENGINE_H
+
+
+class Engine {
+
+};
+
+
+#endif //ASTEROID_DESTROYER_ENGINE_H
