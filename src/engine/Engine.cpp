@@ -6,12 +6,14 @@
 #include "Movable.h"
 #include "Player.h"
 #include "Vec2.h"
+#include "utils.h"
 
 #include <chrono>
 #include <memory>
 #include <thread>
 #include <vector>
-#include <experimental/random>
+
+#include <iostream> // todo: remove
 
 namespace {
     constexpr uint64_t FPS = 60;
@@ -75,7 +77,7 @@ void Engine::update() {
 
     // spawn asteroids
     if (asteroids.size() < 10) {
-        asteroids.emplace_back(Vec2(std::experimental::randint(200, 1720), -200), Vec2(0, 1));
+        asteroids.emplace_back(Vec2(utils::random(200, 1720), -200), Vec2(0, 1));
     }
 }
 
@@ -101,5 +103,6 @@ void Engine::wait() {
 }
 
 void Engine::gameOver() {
-    throw std::runtime_error("Game over!");
+    std::cout << "Game over!" << std::endl;
+    exit(2137);
 }
