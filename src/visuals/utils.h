@@ -1,5 +1,5 @@
-#ifndef JNP3_VS_PROJECTS_UTILS_H
-#define JNP3_VS_PROJECTS_UTILS_H
+#ifndef ASTEROID_DESTROYER_UTILS_H
+#define ASTEROID_DESTROYER_UTILS_H
 
 namespace utils {
     template<typename Interface>
@@ -11,4 +11,4 @@ namespace utils {
     }
 } // namespace utils
 
-#endif //JNP3_VS_PROJECTS_UTILS_H
+#endif //ASTEROID_DESTROYER_UTILS_H

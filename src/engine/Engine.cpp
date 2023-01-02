@@ -107,3 +107,13 @@ void Engine::gameOver() {
     std::cout << "Game over!" << std::endl;
     exit(2137);
 }
+
+void Engine::DrawGameObjects(ID2D1HwndRenderTarget *pTarget) {
+    for (auto &asteroid : asteroids) {
+        asteroid.Draw(pTarget);
+    }
+    for (auto &bullet : bullets) {
+        bullet.Draw(pTarget);
+    }
+    player->Draw(pTarget);
+}

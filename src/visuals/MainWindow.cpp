@@ -2,6 +2,7 @@
 #include "paths.h"
 #include "utils.h"
 #include "BitmapNames.h"
+#include "Singleton.h"
 
 #include <wincodec.h>
 
@@ -62,11 +63,7 @@ void MainWindow::OnPaint() {
         RECT rc;
         GetClientRect(m_hwnd, &rc);
 
-//        auto lambda = [&](std::function<void(BitmapNames, D2D_RECT_F)> &cb) {
-//            engine.DrawGameObjects(cb);
-//        };
-
-        bitmapsManager.DrawAll(pRenderTarget, rc, Engine::sDrawGameObjects, engine);
+        Singleton<BitmapsManager>::getInstance().DrawAll(pRenderTarget, rc);
 
         hr = pRenderTarget->EndDraw();
         if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET) {
@@ -105,9 +102,9 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
                 return -1;
             }
 
-            bitmapsManager.Load(pRenderTarget, pWicFactory, paths::PLAYER_ASSET,
+            Singleton<BitmapsManager>::getInstance().Load(pRenderTarget, pWicFactory, paths::PLAYER_ASSET,
                                 BitmapNames::PLAYER);
-            bitmapsManager.Load(pRenderTarget, pWicFactory, paths::BG_ASSET,
+            Singleton<BitmapsManager>::getInstance().Load(pRenderTarget, pWicFactory, paths::BG_ASSET,
                                 BitmapNames::BACKGROUND);
 
             return 0;
@@ -120,9 +117,9 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         case WM_KEYDOWN:
             if (wParam == VK_RIGHT)
-                bitmapsManager.player_pos_x_tmp += 5;
+                Singleton<BitmapsManager>::getInstance().player_pos_x_tmp += 5;
             if (wParam == VK_LEFT)
-                bitmapsManager.player_pos_x_tmp -= 5;
+                Singleton<BitmapsManager>::getInstance().player_pos_x_tmp -= 5;
             // no return is intentional
 
         case WM_PAINT:

@@ -12,7 +12,7 @@ add_library(asteroid-destroyer-engine
         src/engine/Engine.h src/engine/Engine.cpp
         src/engine/Player.h src/engine/Player.cpp
         src/engine/Movable.h src/engine/Vec2.h src/engine/CircleCollider.h src/engine/Asteroid.h src/engine/Bullet.h
-        src/engine/Input.h src/engine/Timer.h src/engine/utils.h)
+        src/engine/Input.h src/engine/Timer.h src/engine/utils.h src/Singleton.h)
 
 add_executable(engine-run-test src/tests/engine-run-test.cpp)
 
@@ -26,7 +26,7 @@ set(CMAKE_CXX_FLAGS
 add_library(asteroid-destroyer-visuals
         src/visuals/MainWindow.h src/visuals/MainWindow.cpp
         src/visuals/BitmapsManager.h src/visuals/BitmapsManager.cpp
-        src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/utils.h src/visuals/paths.h src/visuals/BitmapNames.h)
+        src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/utils.h src/visuals/paths.h src/visuals/BitmapNames.h src/Singleton.h)
 
 add_executable(visuals-run-test src/tests/visuals-run-test.cpp)
 

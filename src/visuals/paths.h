@@ -1,5 +1,5 @@
-#ifndef JNP3_VS_PROJECTS_PATHS_H
-#define JNP3_VS_PROJECTS_PATHS_H
+#ifndef ASTEROID_DESTROYER_PATHS_H
+#define ASTEROID_DESTROYER_PATHS_H
 
 
 #include "windows_h.h"
@@ -10,4 +10,4 @@ namespace paths {
 } // namespace paths
 
 
-#endif //JNP3_VS_PROJECTS_PATHS_H
+#endif //ASTEROID_DESTROYER_PATHS_H

@@ -1,5 +1,5 @@
-#ifndef JNP3_VS_PROJECTS_MAINWINDOW_H
-#define JNP3_VS_PROJECTS_MAINWINDOW_H
+#ifndef ASTEROID_DESTROYER_MAINWINDOW_H
+#define ASTEROID_DESTROYER_MAINWINDOW_H
 
 
 #include "BaseWindow.h"
@@ -19,8 +19,6 @@ class MainWindow : public BaseWindow<MainWindow> {
     D2D1_ELLIPSE ellipse;
     D2D1_POINT_2F ptMouse;
     IWICImagingFactory *pWicFactory;
-    BitmapsManager bitmapsManager;
-    Engine engine;
 
     HRESULT InitializeWICFactory();
 
@@ -35,7 +33,7 @@ class MainWindow : public BaseWindow<MainWindow> {
 public:
     MainWindow() : pFactory(NULL), pRenderTarget(NULL), pBrush(NULL),
                    pWicFactory(NULL), ellipse(D2D1::Ellipse(D2D1::Point2F(), 0, 0)),
-                   ptMouse(D2D1::Point2F()), bitmapsManager() {
+                   ptMouse(D2D1::Point2F()) {
     }
 
     PCWSTR ClassName() const override { return TEXT("MainWindow Class"); }
@@ -44,4 +42,4 @@ public:
 };
 
 
-#endif //JNP3_VS_PROJECTS_MAINWINDOW_H
+#endif //ASTEROID_DESTROYER_MAINWINDOW_H

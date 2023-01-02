@@ -35,25 +35,7 @@ public:
 
     void gameOver();
 
-    void DrawGameObjects(std::function<void(BitmapNames, D2D_RECT_F)> &drawFunction) {
-        player->Draw(drawFunction);
-        for (auto &asteroid : asteroids) {
-            asteroid.Draw(drawFunction);
-        }
-        for (auto &bullet : bullets) {
-            bullet.Draw(drawFunction);
-        }
-    }
-
-    static void sDrawGameObjects(Engine &engine, std::function<void(BitmapNames, D2D_RECT_F)> drawFunction) {
-        engine.player->Draw(drawFunction);
-        for (auto &asteroid: engine.asteroids) {
-            asteroid.Draw(drawFunction);
-        }
-        for (auto &bullet: engine.bullets) {
-            bullet.Draw(drawFunction);
-        }
-    }
+    void DrawGameObjects(ID2D1HwndRenderTarget *pTarget);
 };
 
 

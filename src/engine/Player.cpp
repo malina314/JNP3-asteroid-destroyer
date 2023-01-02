@@ -6,6 +6,7 @@
 #include "Timer.h"
 #include "Vec2.h"
 #include "BitmapsManager.h"
+#include "BitmapNames.h"
 
 Player::Player(Vec2 position, int colliderRadius, int lives, Engine &engine)
         : Movable(position, colliderRadius, BitmapNames::PLAYER),
@@ -63,8 +64,8 @@ bool Player::isImmune() const {
 
 void Player::shoot() {
     auto bullets = engine.getBullets();
-    bullets.emplace_back(Vec2(position.x + 30, position.y - 30), Vec2(0, -1));
-    bullets.emplace_back(Vec2(position.x - 30, position.y - 30), Vec2(0, -1));
+    bullets.emplace_back(Vec2(position.x + 30, position.y - 30), Vec2(0, -1), BitmapNames::BULLET);
+    bullets.emplace_back(Vec2(position.x - 30, position.y - 30), Vec2(0, -1), BitmapNames::BULLET);
 }
 
 void Player::respawn() {

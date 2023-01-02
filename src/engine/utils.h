@@ -5,7 +5,7 @@
 #include <random>
 
 namespace utils {
-    thread_local std::mt19937 gen{std::random_device{}()};
+    thread_local static inline std::mt19937 gen{std::random_device{}()};
 
     template<typename T>
     T random(T min, T max) {

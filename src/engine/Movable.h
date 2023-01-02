@@ -5,6 +5,8 @@
 #include "CircleCollider.h"
 #include "Vec2.h"
 #include "BitmapNames.h"
+#include "Singleton.h"
+#include "BitmapsManager.h"
 
 #include <d2d1_3.h>
 #include <wincodec.h>
@@ -30,8 +32,8 @@ public:
         collider.position = collider.position + velocity;
     }
 
-    void Draw(std::function<void(BitmapNames, D2D_RECT_F)> drawFunction) {
-        drawFunction(bitmapName, makeRectF());
+    void Draw(ID2D1HwndRenderTarget *pTarget) {
+        Singleton<BitmapsManager>::getInstance().Draw(pTarget, bitmapName, makeRectF());
     }
 
 private:
