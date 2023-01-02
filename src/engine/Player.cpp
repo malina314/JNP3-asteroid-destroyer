@@ -7,10 +7,11 @@
 #include "Vec2.h"
 #include "BitmapsManager.h"
 #include "BitmapNames.h"
+#include "MainWindow.h"
 
-Player::Player(Vec2 position, int colliderRadius, int lives, Engine &engine)
-        : Movable(position, colliderRadius, BitmapNames::PLAYER),
-          lives(lives), score(0), immune(false), spawnPosition(position), engine(engine) {}
+Player::Player(int colliderRadius, int lives, Engine &engine)
+        : Movable(Vec2(0, 0), colliderRadius, BitmapNames::PLAYER),
+          lives(lives), score(0), immune(false), engine(engine) {}
 
 void Player::handleInput() {
     velocity = Vec2(0, 0);
@@ -73,5 +74,10 @@ void Player::respawn() {
     Timer::setTimeout([this]() {
         immune = false;
     }, 3000);
-    position = spawnPosition;
+    spawn();
+}
+
+void Player::spawn() {
+    Vec2 pos = Singleton<MainWindow>::getInstance().GetWindowSize();
+    position = Vec2(pos.x / 2, pos.y - 75);
 }

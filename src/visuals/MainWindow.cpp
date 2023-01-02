@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 #include "paths.h"
-#include "utils.h"
+#include "common/utils.h"
 #include "BitmapNames.h"
 #include "Singleton.h"
 
@@ -131,4 +131,10 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
             return 0;
     }
     return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
+}
+
+Vec2 MainWindow::GetWindowSize() const {
+    RECT rc;
+    GetClientRect(m_hwnd, &rc);
+    return Vec2(rc.right, rc.bottom);
 }

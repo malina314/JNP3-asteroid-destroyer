@@ -27,6 +27,9 @@ public:
 
     std::vector<Bullet> &getBullets();
 
+    // Spawns player. Should be called after window is created
+    void start();
+
     // Updates the game state, should be called once per frame
     void update();
 

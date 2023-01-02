@@ -2,7 +2,7 @@
 #define ASTEROID_DESTROYER_BITMAPSMANAGER_H
 
 
-#include "utils.h"
+#include "common/utils.h"
 #include "windows_h.h"
 #include "BitmapNames.h"
 

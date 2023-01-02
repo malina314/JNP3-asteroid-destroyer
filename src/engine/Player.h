@@ -12,11 +12,10 @@ class Player : public Movable {
     int lives;
     int score;
     bool immune;
-    Vec2 spawnPosition;
     Engine &engine;
 
 public:
-    Player(Vec2 position, int colliderRadius, int lives, Engine &engine);
+    Player(int colliderRadius, int lives, Engine &engine);
 
     void update() override;
 
@@ -25,6 +24,8 @@ public:
     void die();
 
     bool isImmune() const;
+
+    void spawn();
 
 private:
     void handleInput();

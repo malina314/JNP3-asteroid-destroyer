@@ -7,13 +7,15 @@ int WINAPI wWinMain(_In_ [[maybe_unused]] HINSTANCE instance,
                     _In_ [[maybe_unused]] PWSTR cmdLine,
                     _In_ [[maybe_unused]] INT nCmdShow) {
     MainWindow &mainWindow = Singleton<MainWindow>::getInstance();
+    Engine &engine = Singleton<Engine>::getInstance();
 
-
-    if (!mainWindow.Create(TEXT("Game window"), WS_OVERLAPPEDWINDOW)) {
+    if (!mainWindow.Create(TEXT("Asteroids destroyer"), WS_OVERLAPPEDWINDOW)) {
         return 0;
     }
 
     ShowWindow(mainWindow.Window(), nCmdShow);
+
+    engine.start();
 
     // Run the message loop.
     MSG msg = {};

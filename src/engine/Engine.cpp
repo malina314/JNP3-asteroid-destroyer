@@ -6,7 +6,7 @@
 #include "Movable.h"
 #include "Player.h"
 #include "Vec2.h"
-#include "utils.h"
+#include "common/utils.h"
 #include "BitmapsManager.h"
 
 #include <chrono>
@@ -19,11 +19,10 @@
 namespace {
     constexpr uint64_t FPS = 60;
     constexpr uint64_t NS_PER_FRAME = 1'000'000'000 / FPS;
-    const Vec2 PLAYER_START_POSITION = Vec2(960, 800);
 }
 
 Engine::Engine() : lastTime(std::chrono::system_clock::now()),
-           player(std::make_unique<Player>(PLAYER_START_POSITION, 70, 3, *this)) {}
+           player(std::make_unique<Player>(70, 3, *this)) {}
 
 std::vector<Bullet> &Engine::getBullets() {
     return bullets;
@@ -116,4 +115,8 @@ void Engine::DrawGameObjects(ID2D1HwndRenderTarget *pTarget) {
         bullet.Draw(pTarget);
     }
     player->Draw(pTarget);
+}
+
+void Engine::start() {
+    player->spawn();
 }
