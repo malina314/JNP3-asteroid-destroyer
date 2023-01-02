@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Vec2.h"
 #include "utils.h"
+#include "BitmapsManager.h"
 
 #include <chrono>
 #include <memory>
@@ -77,7 +78,7 @@ void Engine::update() {
 
     // spawn asteroids
     if (asteroids.size() < 10) {
-        asteroids.emplace_back(Vec2(utils::random(200, 1720), -200), Vec2(0, 1));
+        asteroids.emplace_back(Vec2(utils::random(200, 1720), -200), Vec2(0, 1), BitmapsManager::randomAsteroid());
     }
 }
 

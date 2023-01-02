@@ -26,7 +26,7 @@ set(CMAKE_CXX_FLAGS
 add_library(asteroid-destroyer-visuals
         src/visuals/MainWindow.h src/visuals/MainWindow.cpp
         src/visuals/BitmapsManager.h src/visuals/BitmapsManager.cpp
-        src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/utils.h src/visuals/paths.h)
+        src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/utils.h src/visuals/paths.h src/visuals/BitmapNames.h)
 
 add_executable(visuals-run-test src/tests/visuals-run-test.cpp)
 

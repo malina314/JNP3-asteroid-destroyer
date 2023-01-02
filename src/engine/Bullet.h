@@ -3,10 +3,13 @@
 
 
 #include "Movable.h"
+#include "Vec2.h"
+#include "BitmapsManager.h"
 
 class Bullet : public Movable {
 public:
-    Bullet(Vec2 position, Vec2 velocity) : Movable(position, velocity, CircleCollider(position, 10)) {}
+    Bullet(Vec2 position, Vec2 velocity, BitmapNames bitmapName)
+        : Movable(position, velocity, CircleCollider(position, 10), bitmapName) {}
 };
 
 

@@ -4,7 +4,9 @@
 
 #include "BaseWindow.h"
 #include "windows_h.h"
+#include "BitmapNames.h"
 #include "BitmapsManager.h"
+#include "Engine.h"
 
 #include <d2d1.h>
 #include <d2d1_1.h>
@@ -18,6 +20,7 @@ class MainWindow : public BaseWindow<MainWindow> {
     D2D1_POINT_2F ptMouse;
     IWICImagingFactory *pWicFactory;
     BitmapsManager bitmapsManager;
+    Engine engine;
 
     HRESULT InitializeWICFactory();
 

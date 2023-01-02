@@ -3,10 +3,13 @@
 
 
 #include "Movable.h"
+#include "Vec2.h"
+#include "BitmapsManager.h"
 
 class Asteroid : public Movable {
 public:
-    Asteroid(Vec2 position, Vec2 velocity) : Movable(position, velocity, CircleCollider(position, 200)) {}
+    Asteroid(Vec2 position, Vec2 velocity, BitmapNames bitmapName)
+        : Movable(position, velocity, CircleCollider(position, 200), bitmapName) {}
 };
 
 

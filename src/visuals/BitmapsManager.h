@@ -4,26 +4,19 @@
 
 #include "utils.h"
 #include "windows_h.h"
+#include "Engine.h"
+#include "BitmapNames.h"
 
 #include <d2d1_3.h>
 #include <wincodec.h>
+#include <functional>
 
 class BitmapsManager {
-public:
-    enum class BitmapNames {
-        PLAYER,
-        BACKGROUND,
-        BULLET,
-        ASTEROID1,
-        ASTEROID2,
-        ASTEROID3,
-        Count // special value used for declaring arrays
-    };
 private:
     ID2D1Bitmap *bitmaps[static_cast<int>(BitmapNames::Count)];
 
 public:
-    int player_pos_x_tmp;
+    int player_pos_x_tmp; // TODO: remove this
 
     void Load(ID2D1RenderTarget *pRenderTarget,
               IWICImagingFactory *pIWICFactory,
@@ -33,6 +26,13 @@ public:
         LoadBitmapFromFile(pRenderTarget, pIWICFactory, uri, &bitmaps[static_cast<int>(bitmapName)]);
     }
 
+    void DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &bgSize,
+                 std::function<void(Engine &, std::function<void(BitmapNames, D2D_RECT_F)>)>
+                         engineDrawCallback,
+                 Engine &engine);
+
+    void Draw(ID2D1HwndRenderTarget *pTarget, ID2D1Bitmap *bitmap, D2D_RECT_F D_rc);
+
     static HRESULT LoadBitmapFromFile(
             ID2D1RenderTarget *pRenderTarget,
             IWICImagingFactory *pIWICFactory,
@@ -40,7 +40,7 @@ public:
             ID2D1Bitmap **ppBitmap
     );
 
-    void DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &rc);
+    static BitmapNames randomAsteroid();
 };
 
 

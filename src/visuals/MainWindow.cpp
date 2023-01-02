@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "paths.h"
 #include "utils.h"
+#include "BitmapNames.h"
 
 #include <wincodec.h>
 
@@ -61,7 +62,11 @@ void MainWindow::OnPaint() {
         RECT rc;
         GetClientRect(m_hwnd, &rc);
 
-        bitmapsManager.DrawAll(pRenderTarget, rc);
+//        auto lambda = [&](std::function<void(BitmapNames, D2D_RECT_F)> &cb) {
+//            engine.DrawGameObjects(cb);
+//        };
+
+        bitmapsManager.DrawAll(pRenderTarget, rc, Engine::sDrawGameObjects, engine);
 
         hr = pRenderTarget->EndDraw();
         if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET) {
@@ -101,9 +106,9 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
             }
 
             bitmapsManager.Load(pRenderTarget, pWicFactory, paths::PLAYER_ASSET,
-                                BitmapsManager::BitmapNames::PLAYER);
+                                BitmapNames::PLAYER);
             bitmapsManager.Load(pRenderTarget, pWicFactory, paths::BG_ASSET,
-                                BitmapsManager::BitmapNames::BACKGROUND);
+                                BitmapNames::BACKGROUND);
 
             return 0;
 

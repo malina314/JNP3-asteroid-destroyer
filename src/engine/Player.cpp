@@ -5,10 +5,11 @@
 #include "Movable.h"
 #include "Timer.h"
 #include "Vec2.h"
+#include "BitmapsManager.h"
 
 Player::Player(Vec2 position, int colliderRadius, int lives, Engine &engine)
-        : Movable(position, colliderRadius), lives(lives), score(0), immune(false),
-        spawnPosition(position), engine(engine) {}
+        : Movable(position, colliderRadius, BitmapNames::PLAYER),
+          lives(lives), score(0), immune(false), spawnPosition(position), engine(engine) {}
 
 void Player::handleInput() {
     velocity = Vec2(0, 0);
