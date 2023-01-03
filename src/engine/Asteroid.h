@@ -9,7 +9,7 @@
 class Asteroid : public GameObject {
 public:
     Asteroid(Vec2 position, Vec2 velocity, BitmapNames bitmapName)
-            : GameObject(position, bitmapName, velocity) {}
+            : GameObject(position, bitmapName, velocity, 20) {}
 };
 
 

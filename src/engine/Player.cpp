@@ -70,8 +70,8 @@ bool Player::isImmune() const {
 void Player::shoot() {
     auto &bullets = engine.getBullets();
     Vec2 center = sprite.getCenter();
-    bullets.emplace_back(Vec2(center.x + 20, center.y - 20), Vec2(0, -1), BitmapNames::BULLET);
-    bullets.emplace_back(Vec2(center.x - 20, center.y - 20), Vec2(0, -1), BitmapNames::BULLET);
+    bullets.emplace_back(Vec2(center.x - 23, center.y - 40), Vec2(0, -1), BitmapNames::BULLET); // left
+    bullets.emplace_back(Vec2(center.x + 13, center.y - 40), Vec2(0, -1), BitmapNames::BULLET); // right
 }
 
 void Player::respawn() {
