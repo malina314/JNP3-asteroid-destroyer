@@ -38,6 +38,9 @@ public:
     void gameOver();
 
     void DrawGameObjects(ID2D1HwndRenderTarget *pTarget);
+
+private:
+    void checkCollisions();
 };
 
 

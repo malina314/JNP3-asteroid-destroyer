@@ -18,6 +18,7 @@ Player::Player(int colliderRadius, int lives, Engine &engine)
 
 void Player::handleInput() {
     velocity = Vec2(0, 0);
+    LOG();
 
     for (auto input : Singleton<Input>::getInstance().inputs) {
         switch (input) {
@@ -41,6 +42,7 @@ void Player::handleInput() {
         }
     }
 
+    LOG();
     Singleton<Input>::getInstance().inputs.clear();
 }
 
@@ -73,6 +75,7 @@ void Player::shoot() {
 }
 
 void Player::respawn() {
+    LOG();
     immune = true;
     Timer::setTimeout([this]() {
         immune = false;

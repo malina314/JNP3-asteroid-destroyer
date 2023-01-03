@@ -21,7 +21,7 @@ target_link_libraries(engine-run-test asteroid-destroyer-engine)
 # visuals
 set(CMAKE_WIN32_EXECUTABLE "True")
 set(CMAKE_CXX_FLAGS
-        "/Wall /std:c++20 /DUNICODE /TP /Zc:__cplusplus /EHs /experimental:module")
+        "/Wall /std:c++20 /DUNICODE /TP /Zc:__cplusplus /EHs /experimental:module /Zc:preprocessor")
 
 add_library(asteroid-destroyer-visuals
         src/visuals/MainWindow.h src/visuals/MainWindow.cpp

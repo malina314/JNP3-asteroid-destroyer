@@ -27,6 +27,7 @@ HRESULT MainWindow::InitializeWICFactory() {
 HRESULT MainWindow::CreateGraphicsResources() {
     HRESULT hr = S_OK;
     if (pRenderTarget == NULL) {
+        LOG();
         RECT rc;
         GetClientRect(m_hwnd, &rc);
 
@@ -46,6 +47,7 @@ HRESULT MainWindow::CreateGraphicsResources() {
 }
 
 void MainWindow::DiscardGraphicsResources() {
+    LOG();
     utils::SafeRelease(&pRenderTarget);
     utils::SafeRelease(&pBrush);
 }
@@ -66,8 +68,11 @@ void MainWindow::OnPaint() {
 
         Singleton<BitmapsManager>::getInstance().DrawAll(pRenderTarget, rc);
 
+//        LOG();
+
         hr = pRenderTarget->EndDraw();
         if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET) {
+            LOG();
             DiscardGraphicsResources();
         }
 
@@ -78,6 +83,7 @@ void MainWindow::OnPaint() {
 }
 
 void MainWindow::Resize() {
+    LOG();
     if (pRenderTarget != NULL) {
         RECT rc;
         GetClientRect(m_hwnd, &rc);
@@ -85,6 +91,7 @@ void MainWindow::Resize() {
         D2D1_SIZE_U size = D2D1::SizeU(rc.right, rc.bottom);
 
         pRenderTarget->Resize(size);
+        LOG();
         InvalidateRect(m_hwnd, NULL, FALSE);
     }
 }
@@ -115,7 +122,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
         case WM_KEYDOWN:
             HandleInput(wParam);
-            // no return is intentional
+            return 0;
 
         case WM_PAINT:
             OnPaint();

@@ -29,6 +29,7 @@ std::vector<Bullet> &Engine::getBullets() {
 }
 
 void Engine::update() {
+    LOG();
     // position update
     for (auto &asteroid : asteroids) {
         asteroid.update();
@@ -39,23 +40,12 @@ void Engine::update() {
 
     // position update & handle input
     player->update();
+    LOG();
 
-    // collision detection
-    for (auto asteroidIt = asteroids.begin(); asteroidIt != asteroids.end();) {
-        // collision with bullet
-        for (auto &bullet : bullets) {
-            if (bullet.collider.collidesWith(asteroidIt->collider)) {
-                player->addScore(1);
-                asteroidIt = asteroids.erase(asteroidIt);
-                continue;
-            }
-        }
-        // collision with player
-        if (!player->isImmune() && asteroidIt->collider.collidesWith(player->collider)) {
-            player->die();
-        }
-        ++asteroidIt;
-    }
+    // check collisions
+    checkCollisions();
+
+    LOG();
 
     // remove bullets that are out of bounds
     // todo: test if this works
@@ -65,6 +55,7 @@ void Engine::update() {
             bullets.pop_back();
         }
     }
+    LOG();
 
     // remove asteroids that are out of bounds
     // todo: test if this works
@@ -74,11 +65,13 @@ void Engine::update() {
             asteroids.pop_back();
         }
     }
+    LOG();
 
     // spawn asteroids
     if (asteroids.size() < 10) {
         asteroids.emplace_back(Vec2(utils::random(200, 1720), -200), Vec2(0, 1), BitmapsManager::randomAsteroid());
     }
+    LOG();
 }
 
 // Holds the thread for a certain amount of time to keep the FPS constant
@@ -119,4 +112,28 @@ void Engine::DrawGameObjects(ID2D1HwndRenderTarget *pTarget) {
 
 void Engine::start() {
     player->spawn();
+}
+
+void Engine::checkCollisions() {
+    // bullets hit asteroids
+    for (int i = 0; i < asteroids.size(); ++i) {
+        for (int j = 0; j < bullets.size(); ++j) {
+            if (bullets[j].collider.collidesWith(asteroids[i].collider)) {
+                player->addScore(1);
+                asteroids[i] = asteroids.back();
+                asteroids.pop_back();
+                bullets[j] = bullets.back();
+                bullets.pop_back();
+                --i;
+                break;
+            }
+        }
+    }
+
+    // player hit asteroids
+    for (int i = 0; i < asteroids.size(); ++i) {
+        if (!player->isImmune() && asteroids[i].collider.collidesWith(player->collider)) {
+            player->die();
+        }
+    }
 }

@@ -1,3 +1,4 @@
 asset-dev/
 .idea/
 cmake-build-*/
+logs/

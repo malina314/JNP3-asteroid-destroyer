@@ -21,9 +21,14 @@ int WINAPI wWinMain(_In_ [[maybe_unused]] HINSTANCE instance,
     MSG msg = {};
     while (GetMessage(&msg, NULL, 0, 0)) {
         engine.update();
+        LOG();
         TranslateMessage(&msg);
+        LOG();
         DispatchMessage(&msg);
+        LOG();
     }
+
+    LOG();
 
     return 0;
 }
