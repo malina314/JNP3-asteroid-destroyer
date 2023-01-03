@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "Player.h"
 #include "Vec2.h"
+#include "AsteroidsSpawnDelayer.h"
 #include "common/utils.h"
 #include "common/constants.h"
 #include "common/Singleton.h"
@@ -61,12 +62,15 @@ void Engine::update() {
 
     // spawn asteroids
     if (asteroids.size() < constants::MAX_ASTEROIDS_COUNT) {
-        asteroids.emplace_back(
-                Vec2(utils::random(constants::ASTEROIDS_SPAWN_MARGIN,
-                                   screenSize.x - constants::ASTEROIDS_SPAWN_MARGIN),
-                     constants::ASTEROIDS_SPAWN_OFFSET_TOP),
-                Vec2(0, constants::ASTEROIDS_SPEED),
-                BitmapsManager::randomAsteroid());
+        if (asteroidsSpawnDelayer.canSpawn()) {
+            asteroids.emplace_back(
+                    Vec2(utils::random(constants::ASTEROIDS_SPAWN_MARGIN,
+                                       screenSize.x - constants::ASTEROIDS_SPAWN_MARGIN),
+                         constants::ASTEROIDS_SPAWN_OFFSET_TOP),
+                    Vec2(0, constants::ASTEROIDS_SPEED),
+                    BitmapsManager::randomAsteroid());
+            asteroidsSpawnDelayer.lock();
+        }
     }
 }
 

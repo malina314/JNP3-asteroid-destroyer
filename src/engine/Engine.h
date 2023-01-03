@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Vec2.h"
 #include "BitmapNames.h"
+#include "AsteroidsSpawnDelayer.h"
 
 #include <chrono>
 #include <memory>
@@ -19,6 +20,7 @@ class Engine {
     std::vector<Asteroid> asteroids;
     std::vector<Bullet> bullets;
     std::unique_ptr<Player> player;
+    AsteroidsSpawnDelayer asteroidsSpawnDelayer;
 
 public:
     Engine();

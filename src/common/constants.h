@@ -12,8 +12,9 @@ namespace constants {
     constexpr size_t MAX_ASTEROIDS_COUNT = 10;
     constexpr int ASTEROID_RADIUS_MARGIN = 20;
     constexpr int ASTEROIDS_SPAWN_MARGIN = 200;
-    constexpr int ASTEROIDS_SPAWN_OFFSET_TOP = -80;
+    constexpr int ASTEROIDS_SPAWN_OFFSET_TOP = -180;
     constexpr int ASTEROIDS_SPEED = 1;
+    constexpr int ASTEROID_SPAWN_DELAY_MS = 600;
 
 
     constexpr int PLAYER_SPEED = 10;
