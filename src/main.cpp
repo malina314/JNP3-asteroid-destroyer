@@ -20,6 +20,7 @@ int WINAPI wWinMain(_In_ [[maybe_unused]] HINSTANCE instance,
     // Run the message loop.
     MSG msg = {};
     while (GetMessage(&msg, NULL, 0, 0)) {
+        engine.update();
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }

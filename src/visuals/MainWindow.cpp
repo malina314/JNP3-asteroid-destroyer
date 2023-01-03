@@ -102,10 +102,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
                 return -1;
             }
 
-            Singleton<BitmapsManager>::getInstance().Load(pRenderTarget, pWicFactory, paths::PLAYER_ASSET,
-                                BitmapNames::PLAYER);
-            Singleton<BitmapsManager>::getInstance().Load(pRenderTarget, pWicFactory, paths::BG_ASSET,
-                                BitmapNames::BACKGROUND);
+            LoadBitmaps();
 
             return 0;
 
@@ -137,4 +134,15 @@ Vec2 MainWindow::GetWindowSize() const {
     RECT rc;
     GetClientRect(m_hwnd, &rc);
     return Vec2(rc.right, rc.bottom);
+}
+
+void MainWindow::LoadBitmaps() {
+    BitmapsManager &bm = Singleton<BitmapsManager>::getInstance();
+
+    bm.Load(pRenderTarget, pWicFactory, paths::PLAYER_ASSET, BitmapNames::PLAYER);
+    bm.Load(pRenderTarget, pWicFactory, paths::BG_ASSET, BitmapNames::BACKGROUND);
+    bm.Load(pRenderTarget, pWicFactory, paths::BULLET_ASSET, BitmapNames::BULLET);
+    bm.Load(pRenderTarget, pWicFactory, paths::ASTEROID1_ASSET, BitmapNames::ASTEROID1);
+    bm.Load(pRenderTarget, pWicFactory, paths::ASTEROID2_ASSET, BitmapNames::ASTEROID2);
+    bm.Load(pRenderTarget, pWicFactory, paths::ASTEROID3_ASSET, BitmapNames::ASTEROID3);
 }

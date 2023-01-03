@@ -30,6 +30,8 @@ class MainWindow : public BaseWindow<MainWindow> {
 
     void Resize();
 
+    void LoadBitmaps();
+
 public:
     MainWindow() : pFactory(NULL), pRenderTarget(NULL), pBrush(NULL),
                    pWicFactory(NULL), ellipse(D2D1::Ellipse(D2D1::Point2F(), 0, 0)),
