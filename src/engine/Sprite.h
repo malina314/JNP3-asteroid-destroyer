@@ -23,7 +23,7 @@ public:
     }
 
     Vec2 getCenter() const {
-        return (position + size) / 2;
+        return position + (size / 2);
     }
 
     int getMeanSize() const {

@@ -32,7 +32,7 @@ std::vector<Bullet> &Engine::getBullets() {
 void Engine::update() {
     LOG();
     // position update
-    for (auto &asteroid : asteroids) {
+     for (auto &asteroid : asteroids) {
         asteroid.update();
     }
     for (auto &bullet : bullets) {
