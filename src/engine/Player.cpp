@@ -5,9 +5,12 @@
 #include "Movable.h"
 #include "Timer.h"
 #include "Vec2.h"
-#include "BitmapsManager.h"
 #include "BitmapNames.h"
 #include "MainWindow.h"
+
+namespace {
+    constexpr int PLAYER_SPEED = 10;
+}
 
 Player::Player(int colliderRadius, int lives, Engine &engine)
         : Movable(Vec2(0, 0), colliderRadius, BitmapNames::PLAYER),
@@ -16,21 +19,21 @@ Player::Player(int colliderRadius, int lives, Engine &engine)
 void Player::handleInput() {
     velocity = Vec2(0, 0);
 
-    for (auto input : InputSingleton::getInstance().inputs) {
+    for (auto input : Singleton<Input>::getInstance().inputs) {
         switch (input) {
-            case Input::MOVE_UP:
-                velocity.y = -1;
+            case Input_t::MOVE_UP:
+                velocity.y = -PLAYER_SPEED;
                 break;
-            case Input::MOVE_DOWN:
-                velocity.y = 1;
+            case Input_t::MOVE_DOWN:
+                velocity.y = PLAYER_SPEED;
                 break;
-            case Input::MOVE_LEFT:
-                velocity.x = -1;
+            case Input_t::MOVE_LEFT:
+                velocity.x = -PLAYER_SPEED;
                 break;
-            case Input::MOVE_RIGHT:
-                velocity.x = 1;
+            case Input_t::MOVE_RIGHT:
+                velocity.x = PLAYER_SPEED;
                 break;
-            case Input::SHOOT:
+            case Input_t::SHOOT:
                 shoot();
                 break;
             default:
@@ -38,7 +41,7 @@ void Player::handleInput() {
         }
     }
 
-    InputSingleton::getInstance().inputs.clear();
+    Singleton<Input>::getInstance().inputs.clear();
 }
 
 void Player::update() {
@@ -64,7 +67,7 @@ bool Player::isImmune() const {
 }
 
 void Player::shoot() {
-    auto bullets = engine.getBullets();
+    auto &bullets = engine.getBullets();
     bullets.emplace_back(Vec2(position.x + 30, position.y - 30), Vec2(0, -1), BitmapNames::BULLET);
     bullets.emplace_back(Vec2(position.x - 30, position.y - 30), Vec2(0, -1), BitmapNames::BULLET);
 }

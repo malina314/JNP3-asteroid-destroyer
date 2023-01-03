@@ -3,6 +3,7 @@
 #include "common/utils.h"
 #include "BitmapNames.h"
 #include "Singleton.h"
+#include "Input.h"
 
 #include <wincodec.h>
 
@@ -113,10 +114,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
             return 0;
 
         case WM_KEYDOWN:
-            if (wParam == VK_RIGHT)
-                Singleton<BitmapsManager>::getInstance().player_pos_x_tmp += 5;
-            if (wParam == VK_LEFT)
-                Singleton<BitmapsManager>::getInstance().player_pos_x_tmp -= 5;
+            HandleInput(wParam);
             // no return is intentional
 
         case WM_PAINT:
@@ -145,4 +143,24 @@ void MainWindow::LoadBitmaps() {
     bm.Load(pRenderTarget, pWicFactory, paths::ASTEROID1_ASSET, BitmapNames::ASTEROID1);
     bm.Load(pRenderTarget, pWicFactory, paths::ASTEROID2_ASSET, BitmapNames::ASTEROID2);
     bm.Load(pRenderTarget, pWicFactory, paths::ASTEROID3_ASSET, BitmapNames::ASTEROID3);
+}
+
+void MainWindow::HandleInput(WPARAM key) const {
+    switch (key) {
+        case VK_UP:
+            Singleton<Input>::getInstance().inputs.push_back(Input_t::MOVE_UP);
+            break;
+        case VK_DOWN:
+            Singleton<Input>::getInstance().inputs.push_back(Input_t::MOVE_DOWN);
+            break;
+        case VK_LEFT:
+            Singleton<Input>::getInstance().inputs.push_back(Input_t::MOVE_LEFT);
+            break;
+        case VK_RIGHT:
+            Singleton<Input>::getInstance().inputs.push_back(Input_t::MOVE_RIGHT);
+            break;
+        case VK_SPACE:
+            Singleton<Input>::getInstance().inputs.push_back(Input_t::SHOOT);
+            break;
+    }
 }

@@ -4,7 +4,6 @@
 
 #include "Asteroid.h"
 #include "Bullet.h"
-#include "Input.h"
 #include "Movable.h"
 #include "Player.h"
 #include "Vec2.h"

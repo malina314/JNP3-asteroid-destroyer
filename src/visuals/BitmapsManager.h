@@ -15,8 +15,6 @@ private:
     ID2D1Bitmap *bitmaps[static_cast<int>(BitmapNames::Count)];
 
 public:
-    int player_pos_x_tmp; // TODO: remove this
-
     void Load(ID2D1RenderTarget *pRenderTarget,
               IWICImagingFactory *pIWICFactory,
               PCWSTR uri,

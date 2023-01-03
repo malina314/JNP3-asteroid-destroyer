@@ -4,7 +4,7 @@
 
 #include <vector>
 
-enum class Input {
+enum class Input_t {
     MOVE_UP,
     MOVE_DOWN,
     MOVE_LEFT,
@@ -12,21 +12,9 @@ enum class Input {
     SHOOT
 };
 
-class InputSingleton {
+class Input {
 public:
-    std::vector<Input> inputs;
-
-    static InputSingleton &getInstance() {
-        static InputSingleton instance;
-
-        return instance;
-    }
-
-    InputSingleton() = default;
-
-    InputSingleton(InputSingleton const &) = delete;
-
-    void operator=(InputSingleton const &) = delete;
+    std::vector<Input_t> inputs;
 };
 
 
