@@ -2,7 +2,7 @@
 #include "paths.h"
 #include "common/utils.h"
 #include "BitmapNames.h"
-#include "Singleton.h"
+#include "common/Singleton.h"
 #include "Input.h"
 
 #include <wincodec.h>

@@ -2,7 +2,7 @@
 #include "windows_h.h"
 #include "common/utils.h"
 #include "Engine.h"
-#include "Singleton.h"
+#include "common/Singleton.h"
 
 #include <d2d1_3.h>
 #include <wincodec.h>

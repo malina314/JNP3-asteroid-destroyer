@@ -1,6 +1,6 @@
 #include "windows_h.h"
 #include "MainWindow.h"
-#include "Singleton.h"
+#include "common/Singleton.h"
 
 int WINAPI wWinMain(_In_ [[maybe_unused]] HINSTANCE instance,
                     _In_opt_ [[maybe_unused]] HINSTANCE prevInstance,

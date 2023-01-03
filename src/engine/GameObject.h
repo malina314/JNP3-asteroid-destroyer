@@ -7,7 +7,7 @@
 #include "Sprite.h"
 #include "BitmapsManager.h"
 #include "BitmapNames.h"
-#include "Singleton.h"
+#include "common/Singleton.h"
 
 #include <d2d1_3.h>
 #include <wincodec.h>
