@@ -2,14 +2,14 @@
 #define ASTEROID_DESTROYER_BULLET_H
 
 
-#include "Movable.h"
+#include "GameObject.h"
 #include "Vec2.h"
-#include "BitmapsManager.h"
+#include "BitmapNames.h"
 
-class Bullet : public Movable {
+class Bullet : public GameObject {
 public:
     Bullet(Vec2 position, Vec2 velocity, BitmapNames bitmapName)
-        : Movable(position, velocity, CircleCollider(position, 10), bitmapName) {}
+        : GameObject(position, bitmapName, velocity) {}
 };
 
 

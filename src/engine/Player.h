@@ -3,19 +3,19 @@
 
 
 #include "Engine.h"
-#include "Movable.h"
+#include "GameObject.h"
 #include "Vec2.h"
 
 class Engine;
 
-class Player : public Movable {
+class Player : public GameObject {
     int lives;
     int score;
     bool immune;
     Engine &engine;
 
 public:
-    Player(int colliderRadius, int lives, Engine &engine);
+    Player(int lives, Engine &engine);
 
     void update() override;
 

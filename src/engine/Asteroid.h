@@ -2,14 +2,14 @@
 #define ASTEROID_DESTROYER_ASTEROID_H
 
 
-#include "Movable.h"
+#include "GameObject.h"
 #include "Vec2.h"
-#include "BitmapsManager.h"
+#include "BitmapNames.h"
 
-class Asteroid : public Movable {
+class Asteroid : public GameObject {
 public:
     Asteroid(Vec2 position, Vec2 velocity, BitmapNames bitmapName)
-        : Movable(position, velocity, CircleCollider(position, 200), bitmapName) {}
+            : GameObject(position, bitmapName, velocity) {}
 };
 
 

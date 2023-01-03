@@ -3,11 +3,12 @@
 #include "Asteroid.h"
 #include "Bullet.h"
 #include "Input.h"
-#include "Movable.h"
+#include "GameObject.h"
 #include "Player.h"
 #include "Vec2.h"
 #include "common/utils.h"
 #include "BitmapsManager.h"
+#include "MainWindow.h"
 
 #include <chrono>
 #include <memory>
@@ -22,7 +23,7 @@ namespace {
 }
 
 Engine::Engine() : lastTime(std::chrono::system_clock::now()),
-           player(std::make_unique<Player>(70, 3, *this)) {}
+           player(std::make_unique<Player>(3, *this)) {}
 
 std::vector<Bullet> &Engine::getBullets() {
     return bullets;
@@ -47,10 +48,13 @@ void Engine::update() {
 
     LOG();
 
+    Vec2 screenSize = Singleton<MainWindow>::getInstance().GetWindowSize();
+
     // remove bullets that are out of bounds
     // todo: test if this works
     for (auto &bullet : bullets) {
-        if (bullet.position.outOfScreen()) {
+        if (bullet.outOfScreen(screenSize)) {
+            LOG2();
             bullet = bullets.back();
             bullets.pop_back();
         }
@@ -60,7 +64,8 @@ void Engine::update() {
     // remove asteroids that are out of bounds
     // todo: test if this works
     for (auto &asteroid : asteroids) {
-        if (asteroid.position.outOfScreen()) {
+        if (asteroid.outOfScreen(screenSize)) {
+            LOG2();
             asteroid = asteroids.back();
             asteroids.pop_back();
         }
@@ -69,7 +74,9 @@ void Engine::update() {
 
     // spawn asteroids
     if (asteroids.size() < 10) {
-        asteroids.emplace_back(Vec2(utils::random(200, 1720), -200), Vec2(0, 1), BitmapsManager::randomAsteroid());
+        asteroids.emplace_back(Vec2(utils::random(200, screenSize.x - 200), -80),
+                               Vec2(0, 1),
+                               BitmapsManager::randomAsteroid());
     }
     LOG();
 }
@@ -118,7 +125,8 @@ void Engine::checkCollisions() {
     // bullets hit asteroids
     for (int i = 0; i < asteroids.size(); ++i) {
         for (int j = 0; j < bullets.size(); ++j) {
-            if (bullets[j].collider.collidesWith(asteroids[i].collider)) {
+            if (bullets[j].getCollider().collidesWith(asteroids[i].getCollider())) {
+                LOG2();
                 player->addScore(1);
                 asteroids[i] = asteroids.back();
                 asteroids.pop_back();
@@ -132,7 +140,7 @@ void Engine::checkCollisions() {
 
     // player hit asteroids
     for (int i = 0; i < asteroids.size(); ++i) {
-        if (!player->isImmune() && asteroids[i].collider.collidesWith(player->collider)) {
+        if (!player->isImmune() && asteroids[i].getCollider().collidesWith(player->getCollider())) {
             player->die();
         }
     }

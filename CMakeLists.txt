@@ -11,8 +11,8 @@ include_directories(src/visuals)
 add_library(asteroid-destroyer-engine
         src/engine/Engine.h src/engine/Engine.cpp
         src/engine/Player.h src/engine/Player.cpp
-        src/engine/Movable.h src/engine/Vec2.h src/engine/CircleCollider.h src/engine/Asteroid.h src/engine/Bullet.h
-        src/engine/Input.h src/engine/Timer.h src/common/utils.h src/Singleton.h)
+        src/engine/GameObject.h src/engine/Vec2.h src/engine/CircleCollider.h src/engine/Asteroid.h src/engine/Bullet.h
+        src/engine/Input.h src/engine/Timer.h src/common/utils.h src/Singleton.h src/engine/Sprite.h)
 
 add_executable(engine-run-test src/tests/engine-run-test.cpp)
 

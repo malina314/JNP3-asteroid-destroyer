@@ -2,7 +2,7 @@
 
 #include "Engine.h"
 #include "Input.h"
-#include "Movable.h"
+#include "GameObject.h"
 #include "Timer.h"
 #include "Vec2.h"
 #include "BitmapNames.h"
@@ -12,9 +12,8 @@ namespace {
     constexpr int PLAYER_SPEED = 10;
 }
 
-Player::Player(int colliderRadius, int lives, Engine &engine)
-        : Movable(Vec2(0, 0), colliderRadius, BitmapNames::PLAYER),
-          lives(lives), score(0), immune(false), engine(engine) {}
+Player::Player(int lives, Engine &engine)
+        : GameObject(BitmapNames::PLAYER), lives(lives), score(0), immune(false), engine(engine) {}
 
 void Player::handleInput() {
     velocity = Vec2(0, 0);
@@ -48,7 +47,7 @@ void Player::handleInput() {
 
 void Player::update() {
     handleInput();
-    Movable::update();
+    GameObject::update();
 }
 
 void Player::addScore(int s) {
@@ -70,8 +69,9 @@ bool Player::isImmune() const {
 
 void Player::shoot() {
     auto &bullets = engine.getBullets();
-    bullets.emplace_back(Vec2(position.x + 30, position.y - 30), Vec2(0, -1), BitmapNames::BULLET);
-    bullets.emplace_back(Vec2(position.x - 30, position.y - 30), Vec2(0, -1), BitmapNames::BULLET);
+    Vec2 center = sprite.getCenter();
+    bullets.emplace_back(Vec2(center.x + 20, center.y - 20), Vec2(0, -1), BitmapNames::BULLET);
+    bullets.emplace_back(Vec2(center.x - 20, center.y - 20), Vec2(0, -1), BitmapNames::BULLET);
 }
 
 void Player::respawn() {
@@ -84,6 +84,9 @@ void Player::respawn() {
 }
 
 void Player::spawn() {
-    Vec2 pos = Singleton<MainWindow>::getInstance().GetWindowSize();
-    position = Vec2(pos.x / 2, pos.y - 75);
+    Vec2 windowSize = Singleton<MainWindow>::getInstance().GetWindowSize();
+    Vec2 target = Vec2(windowSize.x / 2, windowSize.y - 75);
+    Vec2 delta = target - collider.getPosition();
+
+    move(delta);
 }

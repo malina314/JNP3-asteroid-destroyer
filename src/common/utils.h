@@ -55,6 +55,13 @@ namespace utils {
 #define LOG(...)
 #endif
 
+//#define SHOULD_LOG2
+#ifdef SHOULD_LOG2
+#define LOG2(...) utils::logerr(__FILE__, __LINE__ __VA_OPT__(,) __VA_ARGS__)
+#else
+#define LOG2(...)
+#endif
+
 } // namespace utils
 
 #endif //ASTEROID_DESTROYER_UTILS_H
