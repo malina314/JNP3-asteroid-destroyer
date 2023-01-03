@@ -7,31 +7,27 @@
 #include "Vec2.h"
 #include "BitmapNames.h"
 #include "MainWindow.h"
-
-namespace {
-    constexpr int PLAYER_SPEED = 10;
-}
+#include "common/constants.h"
 
 Player::Player(int lives, Engine &engine)
         : GameObject(BitmapNames::PLAYER), lives(lives), score(0), immune(false), engine(engine) {}
 
 void Player::handleInput() {
     velocity = Vec2(0, 0);
-    LOG();
 
     for (auto input : Singleton<Input>::getInstance().inputs) {
         switch (input) {
             case Input_t::MOVE_UP:
-                velocity.y = -PLAYER_SPEED;
+                velocity.y = -constants::PLAYER_SPEED;
                 break;
             case Input_t::MOVE_DOWN:
-                velocity.y = PLAYER_SPEED;
+                velocity.y = constants::PLAYER_SPEED;
                 break;
             case Input_t::MOVE_LEFT:
-                velocity.x = -PLAYER_SPEED;
+                velocity.x = -constants::PLAYER_SPEED;
                 break;
             case Input_t::MOVE_RIGHT:
-                velocity.x = PLAYER_SPEED;
+                velocity.x = constants::PLAYER_SPEED;
                 break;
             case Input_t::SHOOT:
                 shoot();
@@ -41,7 +37,6 @@ void Player::handleInput() {
         }
     }
 
-    LOG();
     Singleton<Input>::getInstance().inputs.clear();
 }
 
@@ -55,7 +50,7 @@ void Player::addScore(int s) {
 }
 
 void Player::die() {
-    lives -= 1;
+    lives--;
     if (lives > 0) {
         respawn();
     } else {
@@ -70,22 +65,27 @@ bool Player::isImmune() const {
 void Player::shoot() {
     auto &bullets = engine.getBullets();
     Vec2 center = sprite.getCenter();
-    bullets.emplace_back(Vec2(center.x - 23, center.y - 40), Vec2(0, -1), BitmapNames::BULLET); // left
-    bullets.emplace_back(Vec2(center.x + 13, center.y - 40), Vec2(0, -1), BitmapNames::BULLET); // right
+    // left
+    bullets.emplace_back(Vec2(center.x + constants::LEFT_BULLET_OFFSET_X,center.y + constants::BULLET_OFFSET_Y),
+                         Vec2(0, constants::BULLET_SPEED),
+                         BitmapNames::BULLET);
+    // right
+    bullets.emplace_back(Vec2(center.x + constants::RIGHT_BULLET_OFFSET_X,center.y + constants::BULLET_OFFSET_Y),
+                         Vec2(0, constants::BULLET_SPEED),
+                         BitmapNames::BULLET);
 }
 
 void Player::respawn() {
-    LOG();
     immune = true;
     Timer::setTimeout([this]() {
         immune = false;
-    }, 3000);
+    }, constants::IMMUNE_TIME_MS);
     spawn();
 }
 
 void Player::spawn() {
     Vec2 windowSize = Singleton<MainWindow>::getInstance().GetWindowSize();
-    Vec2 target = Vec2(windowSize.x / 2, windowSize.y - 75);
+    Vec2 target = Vec2(windowSize.x / 2, windowSize.y + constants::PLAYER_SPAWN_OFFSET);
     Vec2 delta = target - collider.getPosition();
 
     move(delta);

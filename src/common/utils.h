@@ -3,10 +3,12 @@
 
 
 #include <random>
+
+// TODO: remove
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-//#include <errno.h> // TODO: remove
+//#include <errno.h>
 #include <sys/types.h>
 #include <string.h>
 
@@ -53,13 +55,6 @@ namespace utils {
 #define LOG(...) utils::logerr(__FILE__, __LINE__ __VA_OPT__(,) __VA_ARGS__)
 #else
 #define LOG(...)
-#endif
-
-//#define SHOULD_LOG2
-#ifdef SHOULD_LOG2
-#define LOG2(...) utils::logerr(__FILE__, __LINE__ __VA_OPT__(,) __VA_ARGS__)
-#else
-#define LOG2(...)
 #endif
 
 } // namespace utils

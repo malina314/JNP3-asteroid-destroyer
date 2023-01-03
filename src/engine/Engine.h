@@ -4,7 +4,6 @@
 
 #include "Asteroid.h"
 #include "Bullet.h"
-#include "GameObject.h"
 #include "Player.h"
 #include "Vec2.h"
 #include "BitmapNames.h"

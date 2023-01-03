@@ -2,11 +2,11 @@
 
 #include "Asteroid.h"
 #include "Bullet.h"
-#include "Input.h"
-#include "GameObject.h"
 #include "Player.h"
 #include "Vec2.h"
 #include "common/utils.h"
+#include "common/constants.h"
+#include "common/Singleton.h"
 #include "BitmapsManager.h"
 #include "MainWindow.h"
 
@@ -17,20 +17,14 @@
 
 #include <iostream> // todo: remove
 
-namespace {
-    constexpr uint64_t FPS = 60;
-    constexpr uint64_t NS_PER_FRAME = 1'000'000'000 / FPS;
-}
-
 Engine::Engine() : lastTime(std::chrono::system_clock::now()),
-           player(std::make_unique<Player>(3, *this)) {}
+           player(std::make_unique<Player>(constants::START_LIVES, *this)) {}
 
 std::vector<Bullet> &Engine::getBullets() {
     return bullets;
 }
 
 void Engine::update() {
-    LOG();
     // position update
      for (auto &asteroid : asteroids) {
         asteroid.update();
@@ -41,12 +35,9 @@ void Engine::update() {
 
     // position update & handle input
     player->update();
-    LOG();
 
     // check collisions
     checkCollisions();
-
-    LOG();
 
     Vec2 screenSize = Singleton<MainWindow>::getInstance().GetWindowSize();
 
@@ -54,37 +45,35 @@ void Engine::update() {
     // todo: test if this works
     for (auto &bullet : bullets) {
         if (bullet.outOfScreen(screenSize)) {
-            LOG2();
             bullet = bullets.back();
             bullets.pop_back();
         }
     }
-    LOG();
 
     // remove asteroids that are out of bounds
     // todo: test if this works
     for (auto &asteroid : asteroids) {
         if (asteroid.outOfScreen(screenSize)) {
-            LOG2();
             asteroid = asteroids.back();
             asteroids.pop_back();
         }
     }
-    LOG();
 
     // spawn asteroids
-    if (asteroids.size() < 10) {
-        asteroids.emplace_back(Vec2(utils::random(200, screenSize.x - 200), -80),
-                               Vec2(0, 1),
-                               BitmapsManager::randomAsteroid());
+    if (asteroids.size() < constants::MAX_ASTEROIDS_COUNT) {
+        asteroids.emplace_back(
+                Vec2(utils::random(constants::ASTEROIDS_SPAWN_MARGIN,
+                                   screenSize.x - constants::ASTEROIDS_SPAWN_MARGIN),
+                     constants::ASTEROIDS_SPAWN_OFFSET_TOP),
+                Vec2(0, constants::ASTEROIDS_SPEED),
+                BitmapsManager::randomAsteroid());
     }
-    LOG();
 }
 
 // Holds the thread for a certain amount of time to keep the FPS constant
 void Engine::wait() {
     // todo: improve this
-    std::this_thread::sleep_for(std::chrono::nanoseconds(NS_PER_FRAME));
+    std::this_thread::sleep_for(std::chrono::nanoseconds(constants::NS_PER_FRAME));
 
 //    copilot's code
 //    auto now = std::chrono::system_clock::now();
@@ -126,8 +115,7 @@ void Engine::checkCollisions() {
     for (int i = 0; i < asteroids.size(); ++i) {
         for (int j = 0; j < bullets.size(); ++j) {
             if (bullets[j].getCollider().collidesWith(asteroids[i].getCollider())) {
-                LOG2();
-                player->addScore(1);
+                player->addScore(constants::SCORE_PER_ASTEROID);
                 asteroids[i] = asteroids.back();
                 asteroids.pop_back();
                 bullets[j] = bullets.back();

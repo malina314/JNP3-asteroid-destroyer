@@ -8,6 +8,7 @@
 #include "BitmapsManager.h"
 #include "BitmapNames.h"
 #include "common/Singleton.h"
+#include "common/constants.h"
 
 #include <d2d1_3.h>
 #include <wincodec.h>
@@ -20,7 +21,7 @@ protected:
 
 public:
     GameObject(Vec2 position, BitmapNames bitmapName, Vec2 velocity, int radiusMargin)
-            : sprite(bitmapName, position, BitmapSizes[static_cast<int>(bitmapName)]),
+            : sprite(bitmapName, position, constants::BitmapSizes[static_cast<int>(bitmapName)]),
               collider(sprite.getCenter(), sprite.getMeanSize() / 2 - radiusMargin),
               velocity(velocity) {}
 

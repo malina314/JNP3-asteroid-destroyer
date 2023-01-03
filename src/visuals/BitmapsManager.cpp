@@ -1,7 +1,8 @@
 #include "BitmapsManager.h"
 #include "windows_h.h"
-#include "common/utils.h"
 #include "Engine.h"
+#include "common/utils.h"
+#include "common/constants.h"
 #include "common/Singleton.h"
 
 #include <d2d1_3.h>
@@ -75,7 +76,7 @@ HRESULT BitmapsManager::LoadBitmapFromFile(
 }
 
 BitmapNames BitmapsManager::randomAsteroid() {
-    return static_cast<BitmapNames>(utils::random(3, 5));
+    return static_cast<BitmapNames>(utils::random(constants::FIRST_ASTEROID_IN_ENUM, constants::LAST_ASTEROID_IN_ENUM));
 }
 
 void BitmapsManager::DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &bgSize) {

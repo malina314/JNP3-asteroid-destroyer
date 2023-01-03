@@ -25,7 +25,7 @@ set(VISUALS-SOURCES
         src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/paths.h src/visuals/BitmapNames.h)
 
 # common
-set(COMMON-SOURCES src/common/utils.h src/common/Singleton.h)
+set(COMMON-SOURCES src/common/utils.h src/common/Singleton.h src/common/constants.h)
 
 find_library(DIRECT2D d2d1)
 if (NOT DIRECT2D)

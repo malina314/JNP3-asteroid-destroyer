@@ -32,10 +32,6 @@ public:
     int length() const {
         return (int) std::sqrt(x * x + y * y);
     }
-
-    bool outOfScreen() const {
-        return x < -200 || x > 2120 || y < -200 || y > 1280;
-    }
 };
 
 

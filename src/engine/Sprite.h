@@ -4,19 +4,19 @@
 
 #include "Vec2.h"
 #include "BitmapNames.h"
+#include "common/constants.h"
 
 #include <d2d1_3.h>
 #include <wincodec.h>
 
 class Sprite {
-    constexpr static int SCALE_DIV = 2;
     BitmapNames bitmapName;
     Vec2 position; // left top corner
     Vec2 size;
 
 public:
     Sprite(BitmapNames bitmapName, Vec2 position, Vec2 size)
-        : bitmapName(bitmapName), position(position), size(size / SCALE_DIV) {}
+        : bitmapName(bitmapName), position(position), size(size / constants::SCALE_DIV) {}
 
     void move(Vec2 delta) {
         position = position + delta;
