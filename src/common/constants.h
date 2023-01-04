@@ -8,13 +8,15 @@
 namespace constants {
     constexpr uint64_t FPS = 60;
     constexpr uint64_t NS_PER_FRAME = 1'000'000'000 / FPS;
+    constexpr float NS_PER_FRAME_INV = 1.0f / NS_PER_FRAME;
 
     constexpr size_t MAX_ASTEROIDS_COUNT = 10;
     constexpr int ASTEROID_RADIUS_MARGIN = 20;
     constexpr int ASTEROIDS_SPAWN_MARGIN = 200;
     constexpr int ASTEROIDS_SPAWN_OFFSET_TOP = -180;
-    constexpr int ASTEROIDS_SPEED = 2;
     constexpr int ASTEROID_SPAWN_DELAY_MS = 600;
+    constexpr int ASTEROIDS_SPEED = 2;
+    constexpr float ASTEROID_ROTATION_SPEED = 100.0f;
 
 
     constexpr int PLAYER_SPEED = 4;

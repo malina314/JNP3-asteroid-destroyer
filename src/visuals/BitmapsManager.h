@@ -2,6 +2,7 @@
 #define ASTEROID_DESTROYER_BITMAPSMANAGER_H
 
 
+#include "Vec2.h"
 #include "common/utils.h"
 #include "windows_h.h"
 #include "BitmapNames.h"
@@ -26,6 +27,9 @@ public:
     void DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &bgSize);
 
     void Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc);
+
+    void DrawWithRotation(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName,
+                          D2D_RECT_F D_rc, float angle, Vec2 center);
 
     static HRESULT LoadBitmapFromFile(
             ID2D1RenderTarget *pRenderTarget,

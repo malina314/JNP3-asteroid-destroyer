@@ -19,7 +19,7 @@
 
 #include <iostream> // todo: remove
 
-Engine::Engine() : lastTime(std::chrono::system_clock::now()),
+Engine::Engine() : startTime(std::chrono::system_clock::now()),
            player(std::make_unique<Player>(constants::START_LIVES, *this)) {}
 
 std::vector<Bullet> &Engine::getBullets() {
@@ -139,4 +139,8 @@ void Engine::checkCollisions() {
             player->die();
         }
     }
+}
+
+Engine::duration Engine::getTimeSinceStart() const {
+    return std::chrono::system_clock::now() - startTime;
 }

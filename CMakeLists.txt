@@ -16,7 +16,7 @@ set(ENGINE-SOURCES
         src/engine/Engine.h src/engine/Engine.cpp
         src/engine/Player.h src/engine/Player.cpp
         src/engine/GameObject.h src/engine/Vec2.h src/engine/CircleCollider.h src/engine/Asteroid.h src/engine/Bullet.h
-        src/engine/Input.h src/engine/Timer.h src/engine/Sprite.h src/engine/AsteroidsSpawnDelayer.h)
+        src/engine/Input.h src/engine/Timer.h src/engine/Sprite.h src/engine/AsteroidsSpawnDelayer.h src/engine/Asteroid.cpp)
 
 # visuals
 set(VISUALS-SOURCES

@@ -16,7 +16,13 @@
 class Player;
 
 class Engine {
-    std::chrono::time_point<std::chrono::system_clock> lastTime;
+public:
+    using time_point = std::chrono::system_clock::time_point;
+    using duration = std::chrono::system_clock::duration;
+
+private:
+    time_point startTime;
+    time_point lastTime;
     std::vector<Asteroid> asteroids;
     std::vector<Bullet> bullets;
     std::unique_ptr<Player> player;
@@ -39,6 +45,8 @@ public:
     void gameOver();
 
     void DrawGameObjects(ID2D1HwndRenderTarget *pTarget);
+
+    duration getTimeSinceStart() const;
 
 private:
     void checkCollisions();

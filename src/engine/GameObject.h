@@ -42,7 +42,7 @@ public:
         collider.move(pos);
     }
 
-    void Draw(ID2D1HwndRenderTarget *pTarget) {
+    virtual void Draw(ID2D1HwndRenderTarget *pTarget) {
         Singleton<BitmapsManager>::getInstance().Draw(pTarget, sprite.getBitmapName(), sprite.getD2D_RECT_F());
     }
 

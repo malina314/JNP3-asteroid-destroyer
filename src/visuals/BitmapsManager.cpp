@@ -7,6 +7,7 @@
 
 #include <d2d1_3.h>
 #include <wincodec.h>
+#include <d2d1helper.h>
 
 HRESULT BitmapsManager::LoadBitmapFromFile(
         ID2D1RenderTarget *pRenderTarget,
@@ -88,5 +89,24 @@ void BitmapsManager::DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &bgSize) {
 }
 
 void BitmapsManager::Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc) {
+//    if (bitmapName == BitmapNames::BACKGROUND) {
+//        pTarget->SetTransform(
+//                D2D1::Matrix3x2F::Rotation(45.0f, D2D1::Point2F(400, 300)));
+//    } else {
+//        pTarget->SetTransform(
+//                D2D1::Matrix3x2F::Rotation(0.0f, D2D1::Point2F(0, 0)));
+//    }
+
     pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+}
+
+void BitmapsManager::DrawWithRotation(ID2D1HwndRenderTarget *pTarget,
+        BitmapNames bitmapName, D2D_RECT_F D_rc, float angle, Vec2 center) {
+    pTarget->SetTransform(
+            D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(center.x, center.y)));
+
+    pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+
+    pTarget->SetTransform(
+            D2D1::Matrix3x2F::Rotation(0.0f, D2D1::Point2F(center.x, center.y)));
 }
