@@ -26,7 +26,7 @@ public:
 
     void DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &bgSize);
 
-    void Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc);
+    void Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc, float opacity = 1.0f);
 
     void DrawWithRotation(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName,
                           D2D_RECT_F D_rc, float angle, Vec2 center);

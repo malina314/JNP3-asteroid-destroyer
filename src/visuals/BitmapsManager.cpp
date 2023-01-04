@@ -88,16 +88,8 @@ void BitmapsManager::DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &bgSize) {
     Singleton<Engine>::getInstance().DrawGameObjects(pTarget);
 }
 
-void BitmapsManager::Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc) {
-//    if (bitmapName == BitmapNames::BACKGROUND) {
-//        pTarget->SetTransform(
-//                D2D1::Matrix3x2F::Rotation(45.0f, D2D1::Point2F(400, 300)));
-//    } else {
-//        pTarget->SetTransform(
-//                D2D1::Matrix3x2F::Rotation(0.0f, D2D1::Point2F(0, 0)));
-//    }
-
-    pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+void BitmapsManager::Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc, float opacity) {
+    pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 }
 
 void BitmapsManager::DrawWithRotation(ID2D1HwndRenderTarget *pTarget,

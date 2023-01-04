@@ -31,6 +31,8 @@ public:
 
     int getScore() const;
 
+    void Draw(ID2D1HwndRenderTarget *pTarget) override;
+
 private:
     void handleInput();
 

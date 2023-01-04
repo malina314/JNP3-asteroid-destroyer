@@ -93,3 +93,8 @@ int Player::getLives() const {
 int Player::getScore() const {
     return score;
 }
+
+void Player::Draw(ID2D1HwndRenderTarget *pTarget) {
+    float opacity = isImmune() ? 0.5f : 1.0f;
+    Singleton<BitmapsManager>::getInstance().Draw(pTarget, sprite.getBitmapName(), sprite.getD2D_RECT_F(), opacity);
+}
