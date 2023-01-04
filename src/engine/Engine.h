@@ -29,6 +29,7 @@ private:
     std::unique_ptr<Player> player;
     AsteroidsSpawnDelayer asteroidsSpawnDelayer;
     std::vector<AsteroidDebris> asteroidsDebris;
+    bool gameOver_;
 
 public:
     Engine();
@@ -46,11 +47,15 @@ public:
 
     void gameOver();
 
+    bool isGameOver() const;
+
     void DrawGameObjects(ID2D1HwndRenderTarget *pTarget);
 
     duration getTimeSinceStart() const;
 
     std::wstring getText() const;
+
+    std::wstring getGameOverText() const;
 
 private:
     void checkCollisions();

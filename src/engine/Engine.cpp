@@ -28,6 +28,10 @@ std::vector<Bullet> &Engine::getBullets() {
 }
 
 void Engine::update() {
+    if (isGameOver()) {
+        return;
+    }
+
     // scale update
     for (auto &asteroidDebris : asteroidsDebris) {
         asteroidDebris.update();
@@ -111,8 +115,7 @@ void Engine::wait() {
 }
 
 void Engine::gameOver() {
-    std::cout << "Game over!" << std::endl;
-    exit(2137);
+    gameOver_ = true;
 }
 
 void Engine::DrawGameObjects(ID2D1HwndRenderTarget *pTarget) {
@@ -166,7 +169,15 @@ std::wstring Engine::getText() const {
            std::to_wstring(player->getLives());
 }
 
+std::wstring Engine::getGameOverText() const {
+    return L"GAME OVER!\nScore: " + std::to_wstring(player->getScore());
+}
+
 void Engine::makeDebris(const Asteroid &asteroid) {
     asteroidsDebris.emplace_back(asteroid.getSprite().getPosition(),
                                  BitmapsManager::randomAsteroid(), 1.0f);
+}
+
+bool Engine::isGameOver() const {
+    return gameOver_;
 }

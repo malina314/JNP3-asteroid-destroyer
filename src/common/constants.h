@@ -38,6 +38,7 @@ namespace constants {
     constexpr int LAST_ASTEROID_IN_ENUM = 5;
 
     constexpr float FONT_SIZE = 30.0f;
+    constexpr float FONT_SIZE_GAME_OVER = 80.0f;
     constexpr float TEXT_MARGIN_LEFT = 20.0f;
     constexpr float TEXT_MARGIN_TOP = 10.0f;
 

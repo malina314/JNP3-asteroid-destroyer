@@ -24,7 +24,7 @@ public:
         LoadBitmapFromFile(pRenderTarget, pIWICFactory, uri, &bitmaps[static_cast<int>(bitmapName)]);
     }
 
-    void DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &bgSize);
+    void DrawBackground(ID2D1HwndRenderTarget *pTarget, RECT &bgSize);
 
     void Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc, float opacity = 1.0f);
 

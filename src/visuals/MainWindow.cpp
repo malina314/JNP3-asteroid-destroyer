@@ -66,13 +66,23 @@ void MainWindow::OnPaint() {
         RECT rc;
         GetClientRect(m_hwnd, &rc);
 
-        Singleton<BitmapsManager>::getInstance().DrawAll(pRenderTarget, rc);
+        Singleton<BitmapsManager>::getInstance().DrawBackground(pRenderTarget, rc);
 
-        Singleton<TextWriter>::getInstance().WriteText(
-                pRenderTarget,
-                Singleton<Engine>::getInstance().getText(),
-                D2D1::RectF(constants::TEXT_MARGIN_LEFT, constants::TEXT_MARGIN_TOP, rc.right, rc.bottom),
-                pBrush);
+        if (Singleton<Engine>::getInstance().isGameOver()) {
+            Singleton<TextWriter>::getInstance().WriteGameOverText(
+                    pRenderTarget,
+                    Singleton<Engine>::getInstance().getGameOverText(),
+                    D2D1::RectF(constants::TEXT_MARGIN_LEFT, constants::TEXT_MARGIN_TOP, rc.right, rc.bottom),
+                    pBrush);
+        } else {
+            Singleton<Engine>::getInstance().DrawGameObjects(pRenderTarget);
+
+            Singleton<TextWriter>::getInstance().WriteText(
+                    pRenderTarget,
+                    Singleton<Engine>::getInstance().getText(),
+                    D2D1::RectF(constants::TEXT_MARGIN_LEFT, constants::TEXT_MARGIN_TOP, rc.right, rc.bottom),
+                    pBrush);
+        }
 
         hr = pRenderTarget->EndDraw();
         if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET) {

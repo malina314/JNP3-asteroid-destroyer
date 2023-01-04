@@ -10,7 +10,7 @@ enum class Key {
     LEFT,
     RIGHT,
     SPACE,
-    Count
+    Count // special value used for declaring arrays
 };
 
 class Input {

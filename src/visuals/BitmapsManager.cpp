@@ -80,12 +80,8 @@ BitmapNames BitmapsManager::randomAsteroid() {
     return static_cast<BitmapNames>(utils::random(constants::FIRST_ASTEROID_IN_ENUM, constants::LAST_ASTEROID_IN_ENUM));
 }
 
-void BitmapsManager::DrawAll(ID2D1HwndRenderTarget *pTarget, RECT &bgSize) {
-    // draw background
+void BitmapsManager::DrawBackground(ID2D1HwndRenderTarget *pTarget, RECT &bgSize) {
     Draw(pTarget, BitmapNames::BACKGROUND, D2D1::RectF(0, 0, bgSize.right, bgSize.bottom));
-
-    // draw game objects
-    Singleton<Engine>::getInstance().DrawGameObjects(pTarget);
 }
 
 void BitmapsManager::Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc, float opacity) {

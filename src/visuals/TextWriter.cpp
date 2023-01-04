@@ -11,6 +11,7 @@ TextWriter::TextWriter() {
             __uuidof(IDWriteFactory),
             reinterpret_cast<IUnknown**>(&write_factory)
     );
+
     write_factory->CreateTextFormat(
             L"Arial",
             nullptr,
@@ -19,14 +20,28 @@ TextWriter::TextWriter() {
             DWRITE_FONT_STRETCH_NORMAL,
             constants::FONT_SIZE,
             L"en-us",
-            &text_format
+            &text_format[static_cast<int>(TextType::NORMAL)]
     );
 
+    write_factory->CreateTextFormat(
+            L"Arial",
+            nullptr,
+            DWRITE_FONT_WEIGHT_BOLD,
+            DWRITE_FONT_STYLE_NORMAL,
+            DWRITE_FONT_STRETCH_NORMAL,
+            constants::FONT_SIZE_GAME_OVER,
+            L"en-us",
+            &text_format[static_cast<int>(TextType::GAME_OVER)]
+    );
+    text_format[static_cast<int>(TextType::GAME_OVER)]->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
+    text_format[static_cast<int>(TextType::GAME_OVER)]->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 }
 
 TextWriter::~TextWriter() {
     utils::SafeRelease(&write_factory);
-    utils::SafeRelease(&text_format);
+    for (int i = 0; i < static_cast<int>(TextType::Count); ++i) {
+        utils::SafeRelease(&text_format[i]);
+    }
 }
 
 void TextWriter::WriteText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
@@ -34,7 +49,18 @@ void TextWriter::WriteText(ID2D1HwndRenderTarget *pTarget, const std::wstring &t
     pTarget->DrawText(
             text.c_str(),
             text.length(),
-            text_format,
+            text_format[static_cast<int>(TextType::NORMAL)],
+            rc,
+            pBrush
+    );
+}
+
+void TextWriter::WriteGameOverText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
+                           ID2D1SolidColorBrush *pBrush) {
+    pTarget->DrawText(
+            text.c_str(),
+            text.length(),
+            text_format[static_cast<int>(TextType::GAME_OVER)],
             rc,
             pBrush
     );
