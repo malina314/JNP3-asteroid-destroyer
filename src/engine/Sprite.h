@@ -22,6 +22,10 @@ public:
         position = position + delta;
     }
 
+    Vec2 getPosition() const {
+        return position;
+    }
+
     Vec2 getCenter() const {
         return position + (size / 2);
     }

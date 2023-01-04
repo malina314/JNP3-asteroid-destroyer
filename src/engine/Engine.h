@@ -8,6 +8,7 @@
 #include "Vec2.h"
 #include "BitmapNames.h"
 #include "AsteroidsSpawnDelayer.h"
+#include "AsteroidDebris.h"
 
 #include <chrono>
 #include <memory>
@@ -27,6 +28,7 @@ private:
     std::vector<Bullet> bullets;
     std::unique_ptr<Player> player;
     AsteroidsSpawnDelayer asteroidsSpawnDelayer;
+    std::vector<AsteroidDebris> asteroidsDebris;
 
 public:
     Engine();
@@ -52,6 +54,8 @@ public:
 
 private:
     void checkCollisions();
+
+    void makeDebris(const Asteroid &asteroid);
 };
 
 

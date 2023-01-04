@@ -9,13 +9,18 @@
 
 #include <cstdint>
 #include <d2d1.h>
+#include <d2d1helper.h>
 
 Asteroid::Asteroid(Vec2 position, Vec2 velocity, BitmapNames bitmapName)
         : GameObject(position, bitmapName, velocity, constants::ASTEROID_RADIUS_MARGIN) {}
 
 void Asteroid::Draw(ID2D1HwndRenderTarget *pTarget) {
-Singleton<BitmapsManager>::getInstance().DrawWithRotation(
-        pTarget, sprite.getBitmapName(), sprite.getD2D_RECT_F(), calcAngle(), sprite.getCenter());
+    Vec2 center = sprite.getCenter();
+    D2D1::Matrix3x2F tfMatrix = D2D1::Matrix3x2F::Rotation(calcAngle(), D2D1::Point2F(center.x, center.y));
+    D2D1::Matrix3x2F tfMatrixInv = D2D1::Matrix3x2F::Rotation(0.0f, D2D1::Point2F(center.x, center.y));
+
+    Singleton<BitmapsManager>::getInstance().DrawWithTransformation(
+            pTarget, sprite.getBitmapName(), sprite.getD2D_RECT_F(), tfMatrix, tfMatrixInv);
 }
 
 float Asteroid::calcAngle() const {

@@ -5,7 +5,6 @@
 #include "GameObject.h"
 #include "Vec2.h"
 #include "BitmapNames.h"
-#include "common/constants.h"
 
 #include <d2d1.h>
 

@@ -41,6 +41,10 @@ namespace constants {
     constexpr float TEXT_MARGIN_LEFT = 20.0f;
     constexpr float TEXT_MARGIN_TOP = 10.0f;
 
+    constexpr float DEBRIS_DISAPPEARING_SPEED = 0.01f;
+    constexpr float DEBRIS_VISIBILITY_THRESHOLD = 0.05f;
+    constexpr float DEBRIS_OPACITY = 0.5f;
+
     const Vec2 BitmapSizes[] = {
             Vec2(142, 150),     // PLAYER
             Vec2(1920, 1080),   // BACKGROUND

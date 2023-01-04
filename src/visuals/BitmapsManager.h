@@ -28,8 +28,8 @@ public:
 
     void Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc, float opacity = 1.0f);
 
-    void DrawWithRotation(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName,
-                          D2D_RECT_F D_rc, float angle, Vec2 center);
+    void DrawWithTransformation(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc,
+                                D2D1::Matrix3x2F tfMatrix, D2D1::Matrix3x2F tfMatrixInv, float opacity = 1.0f);
 
     static HRESULT LoadBitmapFromFile(
             ID2D1RenderTarget *pRenderTarget,

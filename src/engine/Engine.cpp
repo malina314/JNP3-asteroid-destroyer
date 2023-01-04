@@ -28,6 +28,11 @@ std::vector<Bullet> &Engine::getBullets() {
 }
 
 void Engine::update() {
+    // scale update
+    for (auto &asteroidDebris : asteroidsDebris) {
+        asteroidDebris.update();
+    }
+
     // position update
      for (auto &asteroid : asteroids) {
         asteroid.update();
@@ -44,8 +49,15 @@ void Engine::update() {
 
     Vec2 screenSize = Singleton<MainWindow>::getInstance().GetWindowSize();
 
+    // remove invisible debris
+    for (auto &asteroidDebris : asteroidsDebris) {
+        if (!asteroidDebris.visible()) {
+            asteroidDebris = asteroidsDebris.back();
+            asteroidsDebris.pop_back();
+        }
+    }
+
     // remove bullets that are out of bounds
-    // todo: test if this works
     for (auto &bullet : bullets) {
         if (bullet.outOfScreen(screenSize)) {
             bullet = bullets.back();
@@ -54,7 +66,6 @@ void Engine::update() {
     }
 
     // remove asteroids that are out of bounds
-    // todo: test if this works
     for (auto &asteroid : asteroids) {
         if (asteroid.outOfScreen(screenSize)) {
             asteroid = asteroids.back();
@@ -105,6 +116,9 @@ void Engine::gameOver() {
 }
 
 void Engine::DrawGameObjects(ID2D1HwndRenderTarget *pTarget) {
+    for (auto &asteroidDebris : asteroidsDebris) {
+        asteroidDebris.Draw(pTarget);
+    }
     for (auto &asteroid : asteroids) {
         asteroid.Draw(pTarget);
     }
@@ -124,6 +138,7 @@ void Engine::checkCollisions() {
         for (int j = 0; j < bullets.size(); ++j) {
             if (bullets[j].getCollider().collidesWith(asteroids[i].getCollider())) {
                 player->addScore(constants::SCORE_PER_ASTEROID);
+                makeDebris(asteroids[i]);
                 asteroids[i] = asteroids.back();
                 asteroids.pop_back();
                 bullets[j] = bullets.back();
@@ -149,4 +164,9 @@ Engine::duration Engine::getTimeSinceStart() const {
 std::wstring Engine::getText() const {
     return L"Score: " + std::to_wstring(player->getScore()) + L"\nLives: " +
            std::to_wstring(player->getLives());
+}
+
+void Engine::makeDebris(const Asteroid &asteroid) {
+    asteroidsDebris.emplace_back(asteroid.getSprite().getPosition(),
+                                 BitmapsManager::randomAsteroid(), 1.0f);
 }

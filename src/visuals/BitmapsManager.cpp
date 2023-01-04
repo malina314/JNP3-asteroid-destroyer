@@ -92,13 +92,11 @@ void BitmapsManager::Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName
     pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 }
 
-void BitmapsManager::DrawWithRotation(ID2D1HwndRenderTarget *pTarget,
-        BitmapNames bitmapName, D2D_RECT_F D_rc, float angle, Vec2 center) {
-    pTarget->SetTransform(
-            D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(center.x, center.y)));
+void BitmapsManager::DrawWithTransformation(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc,
+        D2D1::Matrix3x2F tfMatrix, D2D1::Matrix3x2F tfMatrixInv, float opacity ) {
+    pTarget->SetTransform(tfMatrix);
 
-    pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, 1.0f, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
+    pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 
-    pTarget->SetTransform(
-            D2D1::Matrix3x2F::Rotation(0.0f, D2D1::Point2F(center.x, center.y)));
+    pTarget->SetTransform(tfMatrixInv);
 }

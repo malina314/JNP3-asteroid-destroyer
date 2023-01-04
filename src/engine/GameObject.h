@@ -53,6 +53,10 @@ public:
     const CircleCollider &getCollider() const {
         return collider;
     }
+
+    const Sprite &getSprite() const {
+        return sprite;
+    }
 };
 
 
