@@ -2,6 +2,8 @@
 #define ASTEROID_DESTROYER_CONSTANTS_H
 
 
+#include "Vec2.h"
+
 #include <cstddef>
 #include <cstdint>
 
@@ -34,6 +36,10 @@ namespace constants {
 
     constexpr int FIRST_ASTEROID_IN_ENUM = 3;
     constexpr int LAST_ASTEROID_IN_ENUM = 5;
+
+    constexpr float FONT_SIZE = 30.0f;
+    constexpr float TEXT_MARGIN_LEFT = 20.0f;
+    constexpr float TEXT_MARGIN_TOP = 10.0f;
 
     const Vec2 BitmapSizes[] = {
             Vec2(142, 150),     // PLAYER

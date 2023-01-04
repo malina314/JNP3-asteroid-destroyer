@@ -48,6 +48,8 @@ public:
 
     duration getTimeSinceStart() const;
 
+    std::wstring getText() const;
+
 private:
     void checkCollisions();
 };

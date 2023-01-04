@@ -27,6 +27,10 @@ public:
 
     void spawn();
 
+    int getLives() const;
+
+    int getScore() const;
+
 private:
     void handleInput();
 

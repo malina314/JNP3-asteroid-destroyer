@@ -85,3 +85,11 @@ void Player::spawn() {
 
     move(delta);
 }
+
+int Player::getLives() const {
+    return lives;
+}
+
+int Player::getScore() const {
+    return score;
+}

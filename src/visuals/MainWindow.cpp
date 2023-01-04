@@ -1,9 +1,11 @@
 #include "MainWindow.h"
 #include "paths.h"
-#include "common/utils.h"
 #include "BitmapNames.h"
+#include "common/utils.h"
 #include "common/Singleton.h"
 #include "Input.h"
+#include "Engine.h"
+#include "TextWriter.h"
 
 #include <wincodec.h>
 
@@ -65,6 +67,12 @@ void MainWindow::OnPaint() {
         GetClientRect(m_hwnd, &rc);
 
         Singleton<BitmapsManager>::getInstance().DrawAll(pRenderTarget, rc);
+
+        Singleton<TextWriter>::getInstance().WriteText(
+                pRenderTarget,
+                Singleton<Engine>::getInstance().getText(),
+                D2D1::RectF(constants::TEXT_MARGIN_LEFT, constants::TEXT_MARGIN_TOP, rc.right, rc.bottom),
+                pBrush);
 
         hr = pRenderTarget->EndDraw();
         if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET) {

@@ -16,6 +16,7 @@
 #include <memory>
 #include <thread>
 #include <vector>
+#include <string>
 
 #include <iostream> // todo: remove
 
@@ -143,4 +144,9 @@ void Engine::checkCollisions() {
 
 Engine::duration Engine::getTimeSinceStart() const {
     return std::chrono::system_clock::now() - startTime;
+}
+
+std::wstring Engine::getText() const {
+    return L"Score: " + std::to_wstring(player->getScore()) + L"\nLives: " +
+           std::to_wstring(player->getLives());
 }
