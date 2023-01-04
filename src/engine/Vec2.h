@@ -6,12 +6,12 @@
 
 class Vec2 {
 public:
-    int x;
-    int y;
+    float x;
+    float y;
 
     Vec2() : x(0), y(0) {}
 
-    Vec2(int x, int y) : x(x), y(y) {}
+    Vec2(float x, float y) : x(x), y(y) {}
 
     Vec2 operator+(const Vec2& other) const {
         return Vec2(x + other.x, y + other.y);
@@ -21,11 +21,11 @@ public:
         return Vec2(x - other.x, y - other.y);
     }
 
-    Vec2 operator*(const int& scalar) const {
+    Vec2 operator*(float scalar) const {
         return Vec2(x * scalar, y * scalar);
     }
 
-    Vec2 operator/(const int& scalar) const {
+    Vec2 operator/(float scalar) const {
         return Vec2(x / scalar, y / scalar);
     }
 
@@ -41,8 +41,8 @@ public:
         return *this;
     }
 
-    int length() const {
-        return (int) std::sqrt(x * x + y * y);
+    float length() const {
+        return std::sqrt(x * x + y * y);
     }
 };
 

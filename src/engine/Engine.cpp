@@ -137,8 +137,8 @@ void Engine::start() {
 
 void Engine::checkCollisions() {
     // bullets hit asteroids
-    for (int i = 0; i < asteroids.size(); ++i) {
-        for (int j = 0; j < bullets.size(); ++j) {
+    for (size_t i = 0; i < asteroids.size(); ++i) {
+        for (size_t j = 0; j < bullets.size(); ++j) {
             if (bullets[j].getCollider().collidesWith(asteroids[i].getCollider())) {
                 player->addScore(constants::SCORE_PER_ASTEROID);
                 makeDebris(asteroids[i]);
@@ -153,7 +153,7 @@ void Engine::checkCollisions() {
     }
 
     // player hit asteroids
-    for (int i = 0; i < asteroids.size(); ++i) {
+    for (size_t i = 0; i < asteroids.size(); ++i) {
         if (!player->isImmune() && asteroids[i].getCollider().collidesWith(player->getCollider())) {
             player->die();
         }

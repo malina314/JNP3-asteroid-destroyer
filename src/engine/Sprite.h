@@ -16,7 +16,7 @@ class Sprite {
 
 public:
     Sprite(BitmapNames bitmapName, Vec2 position, Vec2 size)
-        : bitmapName(bitmapName), position(position), size(size / constants::SCALE_DIV) {}
+        : bitmapName(bitmapName), position(position), size(size * constants::SCALE) {}
 
     void move(Vec2 delta) {
         position = position + delta;
@@ -30,7 +30,7 @@ public:
         return position + (size / 2);
     }
 
-    int getMeanSize() const {
+    float getMeanSize() const {
         return (size.x + size.y) / 2;
     }
 

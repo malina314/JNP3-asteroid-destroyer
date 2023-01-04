@@ -3,6 +3,7 @@
 
 
 #include <random>
+#include <type_traits>
 
 // TODO: remove
 #include <stdio.h>
@@ -17,7 +18,12 @@ namespace utils {
 
     template<typename T>
     T random(T min, T max) {
-        return std::uniform_int_distribution<T>{min, max}(gen);
+        using dist = std::conditional_t<
+                std::is_integral<T>::value,
+                std::uniform_int_distribution<T>,
+                std::uniform_real_distribution<T>
+        >;
+        return dist{min, max}(gen);
     }
 
     template<typename Interface>

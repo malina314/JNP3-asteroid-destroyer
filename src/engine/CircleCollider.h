@@ -6,10 +6,10 @@
 
 class CircleCollider {
     Vec2 position; // center of the circle
-    int radius;
+    float radius;
 
 public:
-    CircleCollider(Vec2 position, int radius) : position(position), radius(radius) {}
+    CircleCollider(Vec2 position, float radius) : position(position), radius(radius) {}
 
     bool collidesWith(const CircleCollider& other) const {
         return (position - other.position).length() < radius + other.radius;

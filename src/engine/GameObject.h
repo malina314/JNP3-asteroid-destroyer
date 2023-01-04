@@ -20,7 +20,7 @@ protected:
     Vec2 velocity; // velocity of the object, that is, for both collider and sprite
 
 public:
-    GameObject(Vec2 position, BitmapNames bitmapName, Vec2 velocity, int radiusMargin)
+    GameObject(Vec2 position, BitmapNames bitmapName, Vec2 velocity, float radiusMargin)
             : sprite(bitmapName, position, constants::BitmapSizes[static_cast<int>(bitmapName)]),
               collider(sprite.getCenter(), sprite.getMeanSize() / 2 - radiusMargin),
               velocity(velocity) {}
