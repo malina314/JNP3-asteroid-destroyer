@@ -115,7 +115,11 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
             return 0;
 
         case WM_KEYDOWN:
-            HandleInput(wParam);
+            HandleKeyDown(wParam);
+            return 0;
+
+        case WM_KEYUP:
+            HandleKeyUp(wParam);
             return 0;
 
         case WM_PAINT:
@@ -146,22 +150,42 @@ void MainWindow::LoadBitmaps() {
     bm.Load(pRenderTarget, pWicFactory, paths::ASTEROID3_ASSET, BitmapNames::ASTEROID3);
 }
 
-void MainWindow::HandleInput(WPARAM key) const {
+void MainWindow::HandleKeyDown(WPARAM key) const {
     switch (key) {
         case VK_UP:
-            Singleton<Input>::getInstance().inputs.push_back(Input_t::MOVE_UP);
+            Singleton<Input>::getInstance().sendKeyDown(Key::UP);
             break;
         case VK_DOWN:
-            Singleton<Input>::getInstance().inputs.push_back(Input_t::MOVE_DOWN);
+            Singleton<Input>::getInstance().sendKeyDown(Key::DOWN);
             break;
         case VK_LEFT:
-            Singleton<Input>::getInstance().inputs.push_back(Input_t::MOVE_LEFT);
+            Singleton<Input>::getInstance().sendKeyDown(Key::LEFT);
             break;
         case VK_RIGHT:
-            Singleton<Input>::getInstance().inputs.push_back(Input_t::MOVE_RIGHT);
+            Singleton<Input>::getInstance().sendKeyDown(Key::RIGHT);
             break;
         case VK_SPACE:
-            Singleton<Input>::getInstance().inputs.push_back(Input_t::SHOOT);
+            Singleton<Input>::getInstance().sendKeyDown(Key::SPACE);
+            break;
+    }
+}
+
+void MainWindow::HandleKeyUp(WPARAM key) const {
+    switch (key) {
+        case VK_UP:
+            Singleton<Input>::getInstance().sendKeyUp(Key::UP);
+            break;
+        case VK_DOWN:
+            Singleton<Input>::getInstance().sendKeyUp(Key::DOWN);
+            break;
+        case VK_LEFT:
+            Singleton<Input>::getInstance().sendKeyUp(Key::LEFT);
+            break;
+        case VK_RIGHT:
+            Singleton<Input>::getInstance().sendKeyUp(Key::RIGHT);
+            break;
+        case VK_SPACE:
+            Singleton<Input>::getInstance().sendKeyUp(Key::SPACE);
             break;
     }
 }

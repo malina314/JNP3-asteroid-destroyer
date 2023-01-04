@@ -2,19 +2,46 @@
 #define ASTEROID_DESTROYER_INPUT_H
 
 
-#include <vector>
+#include <cstring>
 
-enum class Input_t {
-    MOVE_UP,
-    MOVE_DOWN,
-    MOVE_LEFT,
-    MOVE_RIGHT,
-    SHOOT
+enum class Key {
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT,
+    SPACE,
+    Count
 };
 
 class Input {
+    bool keyDown[static_cast<int>(Key::Count)];
+    bool keyUp[static_cast<int>(Key::Count)];
+    bool keyPressed[static_cast<int>(Key::Count)];
+
 public:
-    std::vector<Input_t> inputs;
+    void sendKeyDown(Key key) {
+        keyDown[static_cast<int>(key)] = true;
+        keyPressed[static_cast<int>(key)] = true;
+    }
+
+    void sendKeyUp(Key key) {
+        keyUp[static_cast<int>(key)] = true;
+        keyPressed[static_cast<int>(key)] = false;
+    }
+
+    // Should be called by engine at the end of each physics update
+    void update() {
+        std::memset(keyDown, 0, sizeof(keyDown));
+        std::memset(keyUp, 0, sizeof(keyUp));
+    }
+
+    bool isKeyPressed(Key key) const {
+        return keyPressed[static_cast<int>(key)];
+    }
+
+    bool isKeyDown(Key key) const {
+        return keyDown[static_cast<int>(key)];
+    }
 };
 
 

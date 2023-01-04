@@ -10,6 +10,7 @@
 #include "common/Singleton.h"
 #include "BitmapsManager.h"
 #include "MainWindow.h"
+#include "Input.h"
 
 #include <chrono>
 #include <memory>
@@ -72,6 +73,8 @@ void Engine::update() {
             asteroidsSpawnDelayer.lock();
         }
     }
+
+    Singleton<Input>::getInstance().update();
 }
 
 // Holds the thread for a certain amount of time to keep the FPS constant

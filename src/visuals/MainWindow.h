@@ -32,7 +32,9 @@ class MainWindow : public BaseWindow<MainWindow> {
 
     void LoadBitmaps();
 
-    void HandleInput(WPARAM key) const;
+    void HandleKeyDown(WPARAM key) const;
+
+    void HandleKeyUp(WPARAM key) const;
 
 public:
     MainWindow() : pFactory(NULL), pRenderTarget(NULL), pBrush(NULL),

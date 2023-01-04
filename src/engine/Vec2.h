@@ -29,6 +29,18 @@ public:
         return Vec2(x / scalar, y / scalar);
     }
 
+    Vec2 &operator+=(const Vec2 &other) {
+        x += other.x;
+        y += other.y;
+        return *this;
+    }
+
+    Vec2 &operator-=(const Vec2 &other) {
+        x -= other.x;
+        y -= other.y;
+        return *this;
+    }
+
     int length() const {
         return (int) std::sqrt(x * x + y * y);
     }

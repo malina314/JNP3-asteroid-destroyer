@@ -13,17 +13,17 @@ namespace constants {
     constexpr int ASTEROID_RADIUS_MARGIN = 20;
     constexpr int ASTEROIDS_SPAWN_MARGIN = 200;
     constexpr int ASTEROIDS_SPAWN_OFFSET_TOP = -180;
-    constexpr int ASTEROIDS_SPEED = 1;
+    constexpr int ASTEROIDS_SPEED = 2;
     constexpr int ASTEROID_SPAWN_DELAY_MS = 600;
 
 
-    constexpr int PLAYER_SPEED = 10;
+    constexpr int PLAYER_SPEED = 4;
     constexpr int PLAYER_SPAWN_OFFSET = -75;
     constexpr int START_LIVES = 3;
     constexpr int SCORE_PER_ASTEROID = 1;
     constexpr int IMMUNE_TIME_MS = 3000;
 
-    constexpr int BULLET_SPEED = -3;
+    constexpr int BULLET_SPEED = -4;
     constexpr int BULLET_OFFSET_Y = -40;
     constexpr int LEFT_BULLET_OFFSET_X = -23;
     constexpr int RIGHT_BULLET_OFFSET_X = 13;

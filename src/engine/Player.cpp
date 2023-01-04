@@ -15,29 +15,24 @@ Player::Player(int lives, Engine &engine)
 void Player::handleInput() {
     velocity = Vec2(0, 0);
 
-    for (auto input : Singleton<Input>::getInstance().inputs) {
-        switch (input) {
-            case Input_t::MOVE_UP:
-                velocity.y = -constants::PLAYER_SPEED;
-                break;
-            case Input_t::MOVE_DOWN:
-                velocity.y = constants::PLAYER_SPEED;
-                break;
-            case Input_t::MOVE_LEFT:
-                velocity.x = -constants::PLAYER_SPEED;
-                break;
-            case Input_t::MOVE_RIGHT:
-                velocity.x = constants::PLAYER_SPEED;
-                break;
-            case Input_t::SHOOT:
-                shoot();
-                break;
-            default:
-                break;
-        }
+    Input &input = Singleton<Input>::getInstance();
+
+    if (input.isKeyPressed(Key::UP)) {
+        velocity += Vec2(0, -constants::PLAYER_SPEED);
+    }
+    if (input.isKeyPressed(Key::DOWN)) {
+        velocity += Vec2(0, constants::PLAYER_SPEED);
+    }
+    if (input.isKeyPressed(Key::LEFT)) {
+        velocity += Vec2(-constants::PLAYER_SPEED, 0);
+    }
+    if (input.isKeyPressed(Key::RIGHT)) {
+        velocity += Vec2(constants::PLAYER_SPEED, 0);
     }
 
-    Singleton<Input>::getInstance().inputs.clear();
+    if (input.isKeyDown(Key::SPACE)) {
+        shoot();
+    }
 }
 
 void Player::update() {
