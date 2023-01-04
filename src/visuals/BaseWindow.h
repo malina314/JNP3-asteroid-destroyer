@@ -45,6 +45,9 @@ public:
         wc.hInstance = GetModuleHandle(NULL);
         wc.lpszClassName = ClassName();
 
+        // hide cursor
+        wc.hCursor = NULL;
+
         RegisterClass(&wc);
 
         m_hwnd = CreateWindowEx(

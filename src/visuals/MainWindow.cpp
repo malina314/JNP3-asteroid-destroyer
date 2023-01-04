@@ -147,6 +147,10 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
         case WM_SIZE:
             Resize();
             return 0;
+
+        case WM_SETCURSOR:
+            SetCursor(NULL);
+            return 0;
     }
     return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
 }
