@@ -19,11 +19,12 @@ class Player;
 class Engine {
 public:
     using time_point = std::chrono::system_clock::time_point;
-    using duration = std::chrono::system_clock::duration;
+    using duration = std::chrono::duration<float, std::micro>;
 
 private:
     time_point startTime;
-    time_point lastTime;
+    time_point lastUpdateTime;
+    duration deltaTime;
     std::vector<Asteroid> asteroids;
     std::vector<Bullet> bullets;
     std::unique_ptr<Player> player;
@@ -42,9 +43,6 @@ public:
     // Updates the game state, should be called once per frame
     void update();
 
-    // Holds the thread for a certain amount of time to keep the FPS constant
-    void wait();
-
     void gameOver();
 
     bool isGameOver() const;
@@ -61,6 +59,8 @@ private:
     void checkCollisions();
 
     void makeDebris(const Asteroid &asteroid);
+
+    void calcDeltaTime();
 };
 
 

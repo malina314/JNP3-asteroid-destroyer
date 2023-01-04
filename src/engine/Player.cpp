@@ -35,9 +35,9 @@ void Player::handleInput() {
     }
 }
 
-void Player::update() {
+void Player::update(float deltaTime) {
     handleInput();
-    GameObject::update();
+    GameObject::update(deltaTime);
 }
 
 void Player::addScore(int s) {

@@ -17,7 +17,7 @@ class Player : public GameObject {
 public:
     Player(int lives, Engine &engine);
 
-    void update() override;
+    void update(float deltaTime) override;
 
     void addScore(int s);
 

@@ -21,7 +21,9 @@
 #include <iostream> // todo: remove
 
 Engine::Engine() : startTime(std::chrono::system_clock::now()),
-           player(std::make_unique<Player>(constants::START_LIVES, *this)) {}
+        lastUpdateTime(std::chrono::system_clock::now()),
+        deltaTime{constants::US_PER_FRAME},
+        player(std::make_unique<Player>(constants::START_LIVES, *this)) {}
 
 std::vector<Bullet> &Engine::getBullets() {
     return bullets;
@@ -32,6 +34,8 @@ void Engine::update() {
         return;
     }
 
+    calcDeltaTime();
+
     // scale update
     for (auto &asteroidDebris : asteroidsDebris) {
         asteroidDebris.update();
@@ -39,14 +43,14 @@ void Engine::update() {
 
     // position update
      for (auto &asteroid : asteroids) {
-        asteroid.update();
+        asteroid.update(deltaTime.count());
     }
     for (auto &bullet : bullets) {
-        bullet.update();
+        bullet.update(deltaTime.count());
     }
 
     // position update & handle input
-    player->update();
+    player->update(deltaTime.count());
 
     // check collisions
     checkCollisions();
@@ -91,27 +95,6 @@ void Engine::update() {
     }
 
     Singleton<Input>::getInstance().update();
-}
-
-// Holds the thread for a certain amount of time to keep the FPS constant
-void Engine::wait() {
-    // todo: improve this
-    std::this_thread::sleep_for(std::chrono::nanoseconds(constants::NS_PER_FRAME));
-
-//    copilot's code
-//    auto now = std::chrono::system_clock::now();
-//    auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - lastTime).count();
-//    if (elapsed < NS_PER_FRAME) {
-//        std::this_thread::sleep_for(std::chrono::nanoseconds(NS_PER_FRAME - elapsed));
-//    }
-//    lastTime = std::chrono::system_clock::now();
-
-//    my code
-//    std::chrono::time_point currentTime = std::chrono::system_clock::now();
-//    std::chrono::duration deltaTime = currentTime - lastTime;
-//    cout << deltaTime.count() << "\n";
-//    std::this_thread::sleep_for(std::chrono::nanoseconds(NS_PER_FRAME - deltaTime.count()));
-//    lastTime = currentTime;
 }
 
 void Engine::gameOver() {
@@ -180,4 +163,10 @@ void Engine::makeDebris(const Asteroid &asteroid) {
 
 bool Engine::isGameOver() const {
     return gameOver_;
+}
+
+void Engine::calcDeltaTime() {
+    auto now = std::chrono::system_clock::now();
+    deltaTime = now - lastUpdateTime;
+    lastUpdateTime = now;
 }

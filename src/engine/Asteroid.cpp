@@ -24,6 +24,6 @@ void Asteroid::Draw(ID2D1HwndRenderTarget *pTarget) {
 }
 
 float Asteroid::calcAngle() const {
-    uint64_t time = Singleton<Engine>::getInstance().getTimeSinceStart().count();
-    return static_cast<float>(time) * constants::NS_PER_FRAME_INV * constants::ASTEROID_ROTATION_SPEED;
+    float time = Singleton<Engine>::getInstance().getTimeSinceStart().count();
+    return time * constants::US_PER_FRAME_INV * constants::ASTEROID_ROTATION_SPEED;
 }

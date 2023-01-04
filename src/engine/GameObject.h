@@ -31,10 +31,10 @@ public:
 
     explicit GameObject(BitmapNames bitmapName) : GameObject(Vec2(0, 0), bitmapName, Vec2(0, 0)) {}
 
-    virtual void update() {
-        // todo: velocity should be multiplied by delta time
-        sprite.move(velocity);
-        collider.move(velocity);
+    virtual void update(float deltaTime) {
+        Vec2 delta = velocity * constants::US_PER_FRAME_INV * constants::SPEED_FACTOR * deltaTime;
+        sprite.move(delta);
+        collider.move(delta);
     }
 
     void move(Vec2 pos) {

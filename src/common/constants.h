@@ -8,9 +8,11 @@
 #include <cstdint>
 
 namespace constants {
-    constexpr uint64_t FPS = 60;
-    constexpr uint64_t NS_PER_FRAME = 1'000'000'000 / FPS;
-    constexpr float NS_PER_FRAME_INV = 1.0f / NS_PER_FRAME;
+    constexpr float FPS = 60;
+    constexpr float US_PER_FRAME = 1'000'000 / FPS;
+    constexpr float US_PER_FRAME_INV = 1 / US_PER_FRAME;
+
+    constexpr float SPEED_FACTOR = 1.3f;
 
     constexpr size_t MAX_ASTEROIDS_COUNT = 10;
     constexpr float ASTEROID_RADIUS_MARGIN = 20;
@@ -18,7 +20,7 @@ namespace constants {
     constexpr float ASTEROIDS_SPAWN_OFFSET_TOP = -180;
     constexpr float ASTEROID_SPAWN_DELAY_MS = 600;
     constexpr float ASTEROIDS_SPEED = 2;
-    constexpr float ASTEROID_ROTATION_SPEED = 100.0f;
+    constexpr float ASTEROID_ROTATION_SPEED = 1.0f;
 
 
     constexpr float PLAYER_SPEED = 4;
