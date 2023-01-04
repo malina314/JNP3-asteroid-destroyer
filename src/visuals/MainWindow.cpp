@@ -72,8 +72,16 @@ void MainWindow::OnPaint() {
             Singleton<TextWriter>::getInstance().WriteGameOverText(
                     pRenderTarget,
                     Singleton<Engine>::getInstance().getGameOverText(),
-                    D2D1::RectF(constants::TEXT_MARGIN_LEFT, constants::TEXT_MARGIN_TOP, rc.right, rc.bottom),
+                    D2D1::RectF(0, 0, rc.right, rc.bottom),
                     pBrush);
+
+            if (Singleton<Engine>::getInstance().getCanCloseWindow()) {
+                Singleton<TextWriter>::getInstance().WriteBottomText(
+                        pRenderTarget,
+                        L"Press space to exit",
+                        D2D1::RectF(0, rc.bottom - constants::BOTTOM_TEXT_MARGIN, rc.right, rc.bottom),
+                        pBrush);
+            }
         } else {
             Singleton<Engine>::getInstance().DrawGameObjects(pRenderTarget);
 
@@ -210,4 +218,8 @@ void MainWindow::HandleKeyUp(WPARAM key) const {
             Singleton<Input>::getInstance().sendKeyUp(Key::SPACE);
             break;
     }
+}
+
+void MainWindow::CloseWindow() {
+    PostMessage(m_hwnd, WM_CLOSE, 0, 0);
 }

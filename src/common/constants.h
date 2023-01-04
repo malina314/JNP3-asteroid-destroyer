@@ -22,7 +22,6 @@ namespace constants {
     constexpr float ASTEROIDS_SPEED = 2;
     constexpr float ASTEROID_ROTATION_SPEED = 1.0f;
 
-
     constexpr float PLAYER_SPEED = 4;
     constexpr float PLAYER_SPAWN_OFFSET = -75;
     constexpr int START_LIVES = 3;
@@ -41,12 +40,16 @@ namespace constants {
 
     constexpr float FONT_SIZE = 30;
     constexpr float FONT_SIZE_GAME_OVER = 80;
+    constexpr float FONT_SIZE_BOTTOM_TEXT = 20;
     constexpr float TEXT_MARGIN_LEFT = 20;
     constexpr float TEXT_MARGIN_TOP = 10;
+    constexpr float BOTTOM_TEXT_MARGIN = 40;
 
     constexpr float DEBRIS_DISAPPEARING_SPEED = 0.01f;
     constexpr float DEBRIS_VISIBILITY_THRESHOLD = 0.05f;
     constexpr float DEBRIS_OPACITY = 0.5f;
+
+    constexpr int CLOSE_WINDOW_DELAY = 3000;
 
     const Vec2 BitmapSizes[] = {
             Vec2(142, 150),     // PLAYER

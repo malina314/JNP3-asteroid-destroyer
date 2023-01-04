@@ -31,6 +31,7 @@ private:
     AsteroidsSpawnDelayer asteroidsSpawnDelayer;
     std::vector<AsteroidDebris> asteroidsDebris;
     bool gameOver_;
+    bool canCloseWindow;
 
 public:
     Engine();
@@ -54,6 +55,8 @@ public:
     std::wstring getText() const;
 
     std::wstring getGameOverText() const;
+
+    bool getCanCloseWindow() const;
 
 private:
     void checkCollisions();

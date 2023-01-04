@@ -47,6 +47,8 @@ public:
     LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) override;
 
     Vec2 GetWindowSize() const;
+
+    void CloseWindow();
 };
 
 

@@ -9,6 +9,7 @@
 enum class TextType {
     NORMAL,
     GAME_OVER,
+    BOTTOM_TEXT,
     Count // special value used for declaring arrays
 };
 
@@ -25,6 +26,9 @@ public:
                    ID2D1SolidColorBrush *pBrush);
 
     void WriteGameOverText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
+                   ID2D1SolidColorBrush *pBrush);
+
+    void WriteBottomText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
                    ID2D1SolidColorBrush *pBrush);
 };
 

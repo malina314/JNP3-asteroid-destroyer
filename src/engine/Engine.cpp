@@ -31,6 +31,10 @@ std::vector<Bullet> &Engine::getBullets() {
 
 void Engine::update() {
     if (isGameOver()) {
+        if (canCloseWindow && Singleton<Input>::getInstance().isKeyPressed(Key::SPACE)) {
+            Singleton<MainWindow>::getInstance().CloseWindow();
+        }
+
         return;
     }
 
@@ -99,6 +103,9 @@ void Engine::update() {
 
 void Engine::gameOver() {
     gameOver_ = true;
+    Timer::setTimeout([this]() {
+        canCloseWindow = true;
+    }, constants::CLOSE_WINDOW_DELAY);
 }
 
 void Engine::DrawGameObjects(ID2D1HwndRenderTarget *pTarget) {
@@ -169,4 +176,8 @@ void Engine::calcDeltaTime() {
     auto now = std::chrono::system_clock::now();
     deltaTime = now - lastUpdateTime;
     lastUpdateTime = now;
+}
+
+bool Engine::getCanCloseWindow() const {
+    return canCloseWindow;
 }
