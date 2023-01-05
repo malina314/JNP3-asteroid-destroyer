@@ -60,8 +60,7 @@ void MainWindow::OnPaint() {
 
         pRenderTarget->BeginDraw();
 
-        pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::SkyBlue));
-        pRenderTarget->FillEllipse(ellipse, pBrush);
+        pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::Black));
 
         RECT rc;
         GetClientRect(m_hwnd, &rc);

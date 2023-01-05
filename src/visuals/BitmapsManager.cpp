@@ -1,9 +1,7 @@
 #include "BitmapsManager.h"
 #include "windows_h.h"
-#include "Engine.h"
 #include "common/utils.h"
 #include "common/constants.h"
-#include "common/Singleton.h"
 
 #include <d2d1_3.h>
 #include <wincodec.h>
@@ -95,4 +93,10 @@ void BitmapsManager::DrawWithTransformation(ID2D1HwndRenderTarget *pTarget, Bitm
     pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 
     pTarget->SetTransform(tfMatrixInv);
+}
+
+BitmapsManager::~BitmapsManager() {
+    for (auto &bitmap : bitmaps) {
+        utils::SafeRelease(&bitmap);
+    }
 }

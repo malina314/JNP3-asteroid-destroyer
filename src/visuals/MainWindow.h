@@ -16,8 +16,6 @@ class MainWindow : public BaseWindow<MainWindow> {
     ID2D1Factory *pFactory;
     ID2D1HwndRenderTarget *pRenderTarget;
     ID2D1SolidColorBrush *pBrush;
-    D2D1_ELLIPSE ellipse;
-    D2D1_POINT_2F ptMouse;
     IWICImagingFactory *pWicFactory;
 
     HRESULT InitializeWICFactory();
@@ -38,8 +36,12 @@ class MainWindow : public BaseWindow<MainWindow> {
 
 public:
     MainWindow() : pFactory(NULL), pRenderTarget(NULL), pBrush(NULL),
-                   pWicFactory(NULL), ellipse(D2D1::Ellipse(D2D1::Point2F(), 0, 0)),
-                   ptMouse(D2D1::Point2F()) {
+                   pWicFactory(NULL) {}
+
+    ~MainWindow() {
+        DiscardGraphicsResources();
+        utils::SafeRelease(&pFactory);
+        utils::SafeRelease(&pRenderTarget);
     }
 
     PCWSTR ClassName() const override { return TEXT("MainWindow Class"); }

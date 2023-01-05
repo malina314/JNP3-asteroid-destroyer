@@ -16,6 +16,8 @@ private:
     ID2D1Bitmap *bitmaps[static_cast<int>(BitmapNames::Count)];
 
 public:
+    ~BitmapsManager();
+
     void Load(ID2D1RenderTarget *pRenderTarget,
               IWICImagingFactory *pIWICFactory,
               PCWSTR uri,

@@ -51,8 +51,8 @@ TextWriter::TextWriter() {
 
 TextWriter::~TextWriter() {
     utils::SafeRelease(&write_factory);
-    for (int i = 0; i < static_cast<int>(TextType::Count); ++i) {
-        utils::SafeRelease(&text_format[i]);
+    for (auto &format : text_format) {
+        utils::SafeRelease(&format);
     }
 }
 
