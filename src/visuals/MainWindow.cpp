@@ -5,6 +5,7 @@
 #include "common/Singleton.h"
 #include "Input.h"
 #include "Engine.h"
+#include "Vec2.h"
 #include "TextWriter.h"
 
 #include <wincodec.h>
@@ -96,11 +97,7 @@ void MainWindow::OnPaint() {
         }
 
         // Draw explosion path
-        pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(-1000, -800));
-        pRenderTarget->SetTransform(D2D1::Matrix3x2F::Scale(0.05f, 0.05f));
-        pRenderTarget->FillGeometry(explosionPath.getPath(), radialGradientBrush1.getBrush());
-        pRenderTarget->DrawGeometry(explosionPath.getPath(), pBrush, 1);
-        pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(0, 0));
+        DrawExplosionPath(Vec2(900, 500), 0.5f);
 
         hr = pRenderTarget->EndDraw();
         if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET) {
@@ -238,4 +235,22 @@ void MainWindow::HandleKeyUp(WPARAM key) const {
 
 void MainWindow::CloseWindow() {
     PostMessage(m_hwnd, WM_CLOSE, 0, 0);
+}
+
+void MainWindow::DrawExplosionPath(Vec2 position, float scale_) {
+    D2D1::Matrix3x2F baseTranslation = D2D1::Matrix3x2F::Translation(-1515, -1050);
+    D2D1::Matrix3x2F baseScale = D2D1::Matrix3x2F::Scale(0.05f, 0.05f);
+    D2D1::Matrix3x2F translation = D2D1::Matrix3x2F::Translation(position.x / scale_, position.y / scale_);
+    D2D1::Matrix3x2F scale = D2D1::Matrix3x2F::Scale(scale_, scale_);
+
+    baseTranslation.SetProduct(baseTranslation, baseScale);
+    baseTranslation.SetProduct(baseTranslation, translation);
+    baseTranslation.SetProduct(baseTranslation, scale);
+
+    pRenderTarget->SetTransform(baseTranslation);
+
+    pRenderTarget->FillGeometry(explosionPath.getPath(), radialGradientBrush1.getBrush());
+    pRenderTarget->DrawGeometry(explosionPath.getPath(), pBrush, 1);
+
+    pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(0, 0));
 }

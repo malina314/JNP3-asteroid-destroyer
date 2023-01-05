@@ -7,6 +7,7 @@
 #include "BitmapNames.h"
 #include "BitmapsManager.h"
 #include "Engine.h"
+#include "Vec2.h"
 #include "gradientBrushes/LinearGradientBrush1.h"
 #include "gradientBrushes/LinearGradientBrush2.h"
 #include "gradientBrushes/RadialGradientBrush1.h"
@@ -41,6 +42,8 @@ class MainWindow : public BaseWindow<MainWindow> {
     void HandleKeyDown(WPARAM key) const;
 
     void HandleKeyUp(WPARAM key) const;
+
+    void DrawExplosionPath(Vec2 position, float scale);
 
 public:
     MainWindow() : pFactory(NULL), pRenderTarget(NULL), pBrush(NULL),
