@@ -10,9 +10,10 @@
 class AsteroidDebris {
     Sprite sprite;
     float scale;
+    float opacity;
 
 public:
-    AsteroidDebris(Vec2 position, BitmapNames bitmapName, float scale);
+    AsteroidDebris(Vec2 position, BitmapNames bitmapName, float scale, float opacity = constants::DEBRIS_OPACITY);
 
     void Draw(ID2D1HwndRenderTarget *pTarget);
 

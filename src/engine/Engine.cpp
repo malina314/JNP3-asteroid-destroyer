@@ -40,6 +40,9 @@ void Engine::update() {
 
     calcDeltaTime();
 
+    // this resolves weird bug with window scaling
+    clearCanary();
+
     // scale update
     for (auto &asteroidDebris : asteroidsDebris) {
         asteroidDebris.update();
@@ -98,6 +101,10 @@ void Engine::update() {
         }
     }
 
+    // this resolves weird bug with window scaling
+    setCanary();
+
+    // should be called at the end of each physics update
     Singleton<Input>::getInstance().update();
 }
 
@@ -180,4 +187,14 @@ void Engine::calcDeltaTime() {
 
 bool Engine::getCanCloseWindow() const {
     return canCloseWindow;
+}
+
+void Engine::setCanary() {
+    asteroidsDebris.emplace_back(Vec2(), BitmapNames::ASTEROID1, 1.0f, 0);
+}
+
+void Engine::clearCanary() {
+    if (!asteroidsDebris.empty()) {
+        asteroidsDebris.pop_back();
+    }
 }

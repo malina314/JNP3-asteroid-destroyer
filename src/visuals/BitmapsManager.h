@@ -9,7 +9,7 @@
 
 #include <d2d1_3.h>
 #include <wincodec.h>
-#include <functional>
+#include <optional>
 
 class BitmapsManager {
 private:
@@ -30,8 +30,12 @@ public:
 
     void Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc, float opacity = 1.0f);
 
-    void DrawWithTransformation(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc,
-                                D2D1::Matrix3x2F tfMatrix, D2D1::Matrix3x2F tfMatrixInv, float opacity = 1.0f);
+    void DrawWithTransformation(ID2D1HwndRenderTarget *pTarget,
+                                BitmapNames bitmapName,
+                                D2D_RECT_F D_rc,
+                                std::optional<D2D1::Matrix3x2F> tfMatrix,
+                                std::optional<D2D1::Matrix3x2F> tfMatrixInv,
+                                float opacity = 1.0f);
 
     static HRESULT LoadBitmapFromFile(
             ID2D1RenderTarget *pRenderTarget,

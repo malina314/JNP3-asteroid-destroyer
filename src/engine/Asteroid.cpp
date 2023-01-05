@@ -7,7 +7,6 @@
 #include "common/constants.h"
 #include "common/Singleton.h"
 
-#include <cstdint>
 #include <d2d1.h>
 #include <d2d1helper.h>
 

@@ -44,6 +44,7 @@ public:
     // Updates the game state, should be called once per frame
     void update();
 
+    // Sets the game over state
     void gameOver();
 
     bool isGameOver() const;
@@ -63,7 +64,14 @@ private:
 
     void makeDebris(const Asteroid &asteroid);
 
+    // Calculates the time passed since last update
     void calcDeltaTime();
+
+    // Should be called at the end of update
+    void setCanary();
+
+    // Should be called at the beginning of update
+    void clearCanary();
 };
 
 

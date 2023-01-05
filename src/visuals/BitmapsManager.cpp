@@ -86,13 +86,21 @@ void BitmapsManager::Draw(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName
     pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 }
 
-void BitmapsManager::DrawWithTransformation(ID2D1HwndRenderTarget *pTarget, BitmapNames bitmapName, D2D_RECT_F D_rc,
-        D2D1::Matrix3x2F tfMatrix, D2D1::Matrix3x2F tfMatrixInv, float opacity ) {
-    pTarget->SetTransform(tfMatrix);
+void BitmapsManager::DrawWithTransformation(ID2D1HwndRenderTarget *pTarget,
+                                            BitmapNames bitmapName,
+                                            D2D_RECT_F D_rc,
+                                            std::optional<D2D1::Matrix3x2F> tfMatrix,
+                                            std::optional<D2D1::Matrix3x2F> tfMatrixInv,
+                                            float opacity) {
+    if (tfMatrix.has_value()) {
+        pTarget->SetTransform(tfMatrix.value());
+    }
 
     pTarget->DrawBitmap(bitmaps[static_cast<int>(bitmapName)], D_rc, opacity, D2D1_BITMAP_INTERPOLATION_MODE_LINEAR);
 
-    pTarget->SetTransform(tfMatrixInv);
+    if (tfMatrixInv.has_value()) {
+        pTarget->SetTransform(tfMatrixInv.value());
+    }
 }
 
 BitmapsManager::~BitmapsManager() {
