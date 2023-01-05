@@ -20,16 +20,19 @@ protected:
     Vec2 velocity; // velocity of the object, that is, for both collider and sprite
 
 public:
-    GameObject(Vec2 position, BitmapNames bitmapName, Vec2 velocity, float radiusMargin)
+    GameObject(Vec2 position, BitmapNames bitmapName, Vec2 velocity, float radiusMargin, Vec2 colliderOffset)
             : sprite(bitmapName, position, constants::BitmapSizes[static_cast<int>(bitmapName)]),
-              collider(sprite.getCenter(), sprite.getMeanSize() / 2 - radiusMargin),
+              collider(sprite.getCenter() + colliderOffset  * constants::SCALE,
+                       sprite.getMeanSize() / 2 - radiusMargin * constants::SCALE),
               velocity(velocity) {}
+
+    GameObject(Vec2 position, BitmapNames bitmapName, Vec2 velocity, float radiusMargin)
+            : GameObject(position, bitmapName, velocity, radiusMargin, Vec2()) {}
 
     GameObject(Vec2 position, BitmapNames bitmapName, Vec2 velocity)
             : GameObject(position, bitmapName, velocity, 0) {}
 
-
-    explicit GameObject(BitmapNames bitmapName) : GameObject(Vec2(0, 0), bitmapName, Vec2(0, 0)) {}
+    explicit GameObject(BitmapNames bitmapName) : GameObject(Vec2(), bitmapName, Vec2()) {}
 
     virtual void update(float deltaTime) {
         Vec2 delta = velocity * constants::US_PER_FRAME_INV * constants::SPEED_FACTOR * deltaTime;

@@ -15,7 +15,7 @@ namespace constants {
     constexpr float SPEED_FACTOR = 1.3f;
 
     constexpr size_t MAX_ASTEROIDS_COUNT = 10;
-    constexpr float ASTEROID_RADIUS_MARGIN = 20;
+    constexpr float ASTEROID_RADIUS_MARGIN = 40;
     constexpr float ASTEROIDS_SPAWN_MARGIN = 200;
     constexpr float ASTEROIDS_SPAWN_OFFSET_TOP = -180;
     constexpr float ASTEROID_SPAWN_DELAY_MS = 600;
@@ -32,6 +32,8 @@ namespace constants {
     constexpr float BULLET_OFFSET_Y = -40;
     constexpr float LEFT_BULLET_OFFSET_X = -23;
     constexpr float RIGHT_BULLET_OFFSET_X = 13;
+    constexpr float BULLET_COLLIDER_RADIUS_MARGIN = 5;
+    const Vec2 BULLET_COLLIDER_OFFSET = Vec2(0, -10);
 
     constexpr float SCALE = 0.5f;
 
@@ -54,7 +56,7 @@ namespace constants {
     const Vec2 BitmapSizes[] = {
             Vec2(142, 150),     // PLAYER
             Vec2(1920, 1080),   // BACKGROUND
-            Vec2(20, 20),       // BULLET
+            Vec2(20, 40),       // BULLET
             Vec2(400, 400),     // ASTEROID1
             Vec2(400, 400),     // ASTEROID2
             Vec2(400, 400)      // ASTEROID3
