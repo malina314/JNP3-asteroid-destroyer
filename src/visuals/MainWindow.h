@@ -9,6 +9,8 @@
 #include "Engine.h"
 #include "gradientBrushes/LinearGradientBrush1.h"
 #include "gradientBrushes/LinearGradientBrush2.h"
+#include "gradientBrushes/RadialGradientBrush1.h"
+#include "ExplosionPath.h"
 
 #include <d2d1.h>
 #include <d2d1_1.h>
@@ -21,6 +23,8 @@ class MainWindow : public BaseWindow<MainWindow> {
     IWICImagingFactory *pWicFactory;
     LinearGradientBrush1 linearGradientBrush1;
     LinearGradientBrush2 linearGradientBrush2;
+    RadialGradientBrush1 radialGradientBrush1;
+    ExplosionPath explosionPath;
 
     HRESULT InitializeWICFactory();
 

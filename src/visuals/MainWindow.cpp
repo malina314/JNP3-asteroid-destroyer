@@ -40,8 +40,7 @@ HRESULT MainWindow::CreateGraphicsResources() {
                 &pRenderTarget);
 
         if (SUCCEEDED(hr)) {
-            const D2D1_COLOR_F color = D2D1::ColorF(1.0f, 1.0f, 0);
-            hr = pRenderTarget->CreateSolidColorBrush(color, &pBrush);
+            hr = pRenderTarget->CreateSolidColorBrush(D2D1::ColorF(D2D1::ColorF::Red), &pBrush);
         }
     }
     return hr;
@@ -67,6 +66,7 @@ void MainWindow::OnPaint() {
 
         Singleton<BitmapsManager>::getInstance().DrawBackground(pRenderTarget, rc);
 
+        // Draw all game objects and text
         if (Singleton<Engine>::getInstance().isGameOver()) {
             auto brush = linearGradientBrush2.getBrush(pRenderTarget,
                                                        D2D1::Point2F(0, 0),
@@ -94,6 +94,13 @@ void MainWindow::OnPaint() {
                     D2D1::RectF(constants::TEXT_MARGIN_LEFT, constants::TEXT_MARGIN_TOP, rc.right, rc.bottom),
                     linearGradientBrush1.getBrush());
         }
+
+        // Draw explosion path
+        pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(-1000, -800));
+        pRenderTarget->SetTransform(D2D1::Matrix3x2F::Scale(0.05f, 0.05f));
+        pRenderTarget->FillGeometry(explosionPath.getPath(), radialGradientBrush1.getBrush());
+        pRenderTarget->DrawGeometry(explosionPath.getPath(), pBrush, 1);
+        pRenderTarget->SetTransform(D2D1::Matrix3x2F::Translation(0, 0));
 
         hr = pRenderTarget->EndDraw();
         if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET) {
@@ -137,6 +144,9 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
             linearGradientBrush1.init(pRenderTarget);
             linearGradientBrush2.init(pRenderTarget);
+            radialGradientBrush1.init(pRenderTarget);
+
+            explosionPath.init(pFactory);
 
             return 0;
 
