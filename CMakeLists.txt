@@ -16,13 +16,16 @@ set(ENGINE-SOURCES
         src/engine/Engine.h src/engine/Engine.cpp
         src/engine/Player.h src/engine/Player.cpp
         src/engine/GameObject.h src/engine/Vec2.h src/engine/CircleCollider.h src/engine/Asteroid.h src/engine/Bullet.h
-        src/engine/Input.h src/engine/Timer.h src/engine/Sprite.h src/engine/AsteroidsSpawnDelayer.h src/engine/Asteroid.cpp src/engine/AsteroidDebris.cpp src/engine/AsteroidDebris.h)
+        src/engine/Input.h src/engine/Timer.h src/engine/Sprite.h src/engine/AsteroidsSpawnDelayer.h
+        src/engine/Asteroid.cpp src/engine/AsteroidDebris.cpp src/engine/AsteroidDebris.h)
 
 # visuals
 set(VISUALS-SOURCES
         src/visuals/MainWindow.h src/visuals/MainWindow.cpp
         src/visuals/BitmapsManager.h src/visuals/BitmapsManager.cpp
-        src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/paths.h src/visuals/BitmapNames.h src/visuals/TextWriter.cpp src/visuals/TextWriter.h src/visuals/LinearGradientBrush.h)
+        src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/paths.h src/visuals/BitmapNames.h
+        src/visuals/TextWriter.cpp src/visuals/TextWriter.h
+        src/visuals/gradientBrushes/LinearGradientBrush1.h src/visuals/gradientBrushes/LinearGradientBrush2.h)
 
 # common
 set(COMMON-SOURCES src/common/utils.h src/common/Singleton.h src/common/constants.h)

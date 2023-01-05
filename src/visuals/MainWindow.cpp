@@ -68,18 +68,22 @@ void MainWindow::OnPaint() {
         Singleton<BitmapsManager>::getInstance().DrawBackground(pRenderTarget, rc);
 
         if (Singleton<Engine>::getInstance().isGameOver()) {
+            auto brush = linearGradientBrush2.getBrush(pRenderTarget,
+                                                       D2D1::Point2F(0, 0),
+                                                       D2D1::Point2F(rc.right, rc.bottom));
+
             Singleton<TextWriter>::getInstance().WriteGameOverText(
                     pRenderTarget,
                     Singleton<Engine>::getInstance().getGameOverText(),
                     D2D1::RectF(0, 0, rc.right, rc.bottom),
-                    linearGradientBrush.getBrush());
+                    brush);
 
             if (Singleton<Engine>::getInstance().getCanCloseWindow()) {
                 Singleton<TextWriter>::getInstance().WriteBottomText(
                         pRenderTarget,
                         L"Press space to exit",
                         D2D1::RectF(0, rc.bottom - constants::BOTTOM_TEXT_MARGIN, rc.right, rc.bottom),
-                        pBrush);
+                        brush);
             }
         } else {
             Singleton<Engine>::getInstance().DrawGameObjects(pRenderTarget);
@@ -88,7 +92,7 @@ void MainWindow::OnPaint() {
                     pRenderTarget,
                     Singleton<Engine>::getInstance().getText(),
                     D2D1::RectF(constants::TEXT_MARGIN_LEFT, constants::TEXT_MARGIN_TOP, rc.right, rc.bottom),
-                    linearGradientBrush.getBrush());
+                    linearGradientBrush1.getBrush());
         }
 
         hr = pRenderTarget->EndDraw();
@@ -131,7 +135,8 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
             LoadBitmaps();
 
-            linearGradientBrush.init(pRenderTarget);
+            linearGradientBrush1.init(pRenderTarget);
+            linearGradientBrush2.init(pRenderTarget);
 
             return 0;
 
