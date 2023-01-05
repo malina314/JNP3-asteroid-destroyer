@@ -57,7 +57,7 @@ TextWriter::~TextWriter() {
 }
 
 void TextWriter::WriteText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
-                           ID2D1SolidColorBrush *pBrush) {
+                           ID2D1Brush *pBrush) {
     pTarget->DrawText(
             text.c_str(),
             text.length(),
@@ -68,7 +68,7 @@ void TextWriter::WriteText(ID2D1HwndRenderTarget *pTarget, const std::wstring &t
 }
 
 void TextWriter::WriteGameOverText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
-                                   ID2D1SolidColorBrush *pBrush) {
+                                   ID2D1Brush *pBrush) {
     pTarget->DrawText(
             text.c_str(),
             text.length(),
@@ -79,7 +79,7 @@ void TextWriter::WriteGameOverText(ID2D1HwndRenderTarget *pTarget, const std::ws
 }
 
 void TextWriter::WriteBottomText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
-                                 ID2D1SolidColorBrush *pBrush) {
+                                 ID2D1Brush *pBrush) {
     pTarget->DrawText(
             text.c_str(),
             text.length(),

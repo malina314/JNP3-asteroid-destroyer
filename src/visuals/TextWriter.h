@@ -23,13 +23,13 @@ public:
     ~TextWriter();
 
     void WriteText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
-                   ID2D1SolidColorBrush *pBrush);
+                   ID2D1Brush *pBrush);
 
     void WriteGameOverText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
-                   ID2D1SolidColorBrush *pBrush);
+                   ID2D1Brush *pBrush);
 
     void WriteBottomText(ID2D1HwndRenderTarget *pTarget, const std::wstring &text, D2D1_RECT_F rc,
-                   ID2D1SolidColorBrush *pBrush);
+                   ID2D1Brush *pBrush);
 };
 
 

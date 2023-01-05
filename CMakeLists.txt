@@ -22,7 +22,7 @@ set(ENGINE-SOURCES
 set(VISUALS-SOURCES
         src/visuals/MainWindow.h src/visuals/MainWindow.cpp
         src/visuals/BitmapsManager.h src/visuals/BitmapsManager.cpp
-        src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/paths.h src/visuals/BitmapNames.h src/visuals/TextWriter.cpp src/visuals/TextWriter.h)
+        src/visuals/BaseWindow.h src/visuals/windows_h.h src/visuals/paths.h src/visuals/BitmapNames.h src/visuals/TextWriter.cpp src/visuals/TextWriter.h src/visuals/LinearGradientBrush.h)
 
 # common
 set(COMMON-SOURCES src/common/utils.h src/common/Singleton.h src/common/constants.h)

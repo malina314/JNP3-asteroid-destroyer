@@ -7,6 +7,7 @@
 #include "BitmapNames.h"
 #include "BitmapsManager.h"
 #include "Engine.h"
+#include "LinearGradientBrush.h"
 
 #include <d2d1.h>
 #include <d2d1_1.h>
@@ -17,6 +18,7 @@ class MainWindow : public BaseWindow<MainWindow> {
     ID2D1HwndRenderTarget *pRenderTarget;
     ID2D1SolidColorBrush *pBrush;
     IWICImagingFactory *pWicFactory;
+    LinearGradientBrush linearGradientBrush;
 
     HRESULT InitializeWICFactory();
 

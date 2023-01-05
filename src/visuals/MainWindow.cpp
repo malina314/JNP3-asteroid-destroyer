@@ -72,7 +72,7 @@ void MainWindow::OnPaint() {
                     pRenderTarget,
                     Singleton<Engine>::getInstance().getGameOverText(),
                     D2D1::RectF(0, 0, rc.right, rc.bottom),
-                    pBrush);
+                    linearGradientBrush.getBrush());
 
             if (Singleton<Engine>::getInstance().getCanCloseWindow()) {
                 Singleton<TextWriter>::getInstance().WriteBottomText(
@@ -88,7 +88,7 @@ void MainWindow::OnPaint() {
                     pRenderTarget,
                     Singleton<Engine>::getInstance().getText(),
                     D2D1::RectF(constants::TEXT_MARGIN_LEFT, constants::TEXT_MARGIN_TOP, rc.right, rc.bottom),
-                    pBrush);
+                    linearGradientBrush.getBrush());
         }
 
         hr = pRenderTarget->EndDraw();
@@ -130,6 +130,8 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) {
             }
 
             LoadBitmaps();
+
+            linearGradientBrush.init(pRenderTarget);
 
             return 0;
 
