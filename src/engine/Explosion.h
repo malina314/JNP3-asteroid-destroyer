@@ -15,9 +15,9 @@ class Explosion {
     Vec2 position;
 
 public:
-    explicit Explosion(Vec2 position) : scaleAnimator(), position(position) {
-        scaleAnimator.addAnimator(Animator(0, 1, utils::duration{constants::EXPLOSION_APPEAR_DURATION}));
-        scaleAnimator.addAnimator(Animator(1, 0, utils::duration{constants::EXPLOSION_DISAPPEAR_DURATION}));
+    explicit Explosion(Vec2 position, float scale = 1.0f) : scaleAnimator(), position(position) {
+        scaleAnimator.addAnimator(Animator(0, scale, utils::duration{constants::EXPLOSION_APPEAR_DURATION}));
+        scaleAnimator.addAnimator(Animator(scale, 0, utils::duration{constants::EXPLOSION_DISAPPEAR_DURATION}));
         scaleAnimator.start();
     }
 

@@ -25,6 +25,7 @@ namespace constants {
 
     constexpr float PLAYER_SPEED = 4;
     constexpr float PLAYER_SPAWN_OFFSET = -75;
+    constexpr float PLAYER_EXPLOSION_SCALE = 2;
     constexpr int START_LIVES = 3;
     constexpr int SCORE_PER_ASTEROID = 1;
     constexpr int IMMUNE_TIME_MS = 3000;

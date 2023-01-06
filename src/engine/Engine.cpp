@@ -152,7 +152,7 @@ void Engine::checkCollisions() {
                 player->addScore(constants::SCORE_PER_ASTEROID);
                 makeDebris(asteroids[i]);
                 makeDebris(asteroids[i]);
-                explode(bullets[j]);
+                explode(bullets[j].getCollider().getPosition());
                 asteroids[i] = asteroids.back();
                 asteroids.pop_back();
                 bullets[j] = bullets.back();
@@ -166,6 +166,7 @@ void Engine::checkCollisions() {
     // player hit asteroids
     for (size_t i = 0; i < asteroids.size(); ++i) {
         if (!player->isImmune() && asteroids[i].getCollider().collidesWith(player->getCollider())) {
+            explode(player->getCollider().getPosition(), constants::PLAYER_EXPLOSION_SCALE);
             player->die();
         }
     }
@@ -213,6 +214,6 @@ void Engine::clearCanary() {
     }
 }
 
-void Engine::explode(const Bullet &bullet) {
-    explosions.emplace_back(bullet.getCollider().getPosition());
+void Engine::explode(Vec2 position, float scale) {
+    explosions.emplace_back(position, scale);
 }

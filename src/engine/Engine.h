@@ -70,7 +70,7 @@ private:
     // Should be called at the beginning of update
     void clearCanary();
 
-    void explode(const Bullet &bullet);
+    void explode(Vec2 position, float scale = 1.0f);
 };
 
 
