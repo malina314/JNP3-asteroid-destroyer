@@ -9,22 +9,18 @@
 #include "BitmapNames.h"
 #include "AsteroidsSpawnDelayer.h"
 #include "AsteroidDebris.h"
+#include "common/utils.h"
+#include "Explosion.h"
 
-#include <chrono>
 #include <memory>
 #include <vector>
 
 class Player;
 
 class Engine {
-public:
-    using time_point = std::chrono::system_clock::time_point;
-    using duration = std::chrono::duration<float, std::micro>;
-
-private:
-    time_point startTime;
-    time_point lastUpdateTime;
-    duration deltaTime;
+    utils::time_point startTime;
+    utils::time_point lastUpdateTime;
+    utils::duration deltaTime;
     std::vector<Asteroid> asteroids;
     std::vector<Bullet> bullets;
     std::unique_ptr<Player> player;
@@ -32,6 +28,7 @@ private:
     std::vector<AsteroidDebris> asteroidsDebris;
     bool gameOver_;
     bool canCloseWindow;
+    std::vector<Explosion> explosions;
 
 public:
     Engine();
@@ -51,7 +48,7 @@ public:
 
     void DrawGameObjects(ID2D1HwndRenderTarget *pTarget);
 
-    duration getTimeSinceStart() const;
+    utils::duration getTimeSinceStart() const;
 
     std::wstring getText() const;
 
@@ -72,6 +69,8 @@ private:
 
     // Should be called at the beginning of update
     void clearCanary();
+
+    void explode(const Bullet &bullet);
 };
 
 

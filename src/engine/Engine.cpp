@@ -18,8 +18,6 @@
 #include <vector>
 #include <string>
 
-#include <iostream> // todo: remove
-
 Engine::Engine() : startTime(std::chrono::system_clock::now()),
         lastUpdateTime(std::chrono::system_clock::now()),
         deltaTime{constants::US_PER_FRAME},
@@ -47,6 +45,9 @@ void Engine::update() {
     for (auto &asteroidDebris : asteroidsDebris) {
         asteroidDebris.update();
     }
+    for (auto &explosion : explosions) {
+        explosion.update();
+    }
 
     // position update
      for (auto &asteroid : asteroids) {
@@ -71,6 +72,17 @@ void Engine::update() {
             asteroidsDebris.pop_back();
         }
     }
+
+    LOG("explosions.size() = %d", explosions.size());
+    // remove invisible explosions
+    for (auto &explosion : explosions) {
+        if (explosion.isFinished()) {
+            LOG("explosion is finished");
+            explosion = explosions.back();
+            explosions.pop_back();
+        }
+    }
+    LOG("explosions.size() = %d", explosions.size());
 
     // remove bullets that are out of bounds
     for (auto &bullet : bullets) {
@@ -125,6 +137,9 @@ void Engine::DrawGameObjects(ID2D1HwndRenderTarget *pTarget) {
     for (auto &bullet : bullets) {
         bullet.Draw(pTarget);
     }
+    for (auto &explosion : explosions) {
+        explosion.Draw();
+    }
     player->Draw(pTarget);
 }
 
@@ -139,6 +154,8 @@ void Engine::checkCollisions() {
             if (bullets[j].getCollider().collidesWith(asteroids[i].getCollider())) {
                 player->addScore(constants::SCORE_PER_ASTEROID);
                 makeDebris(asteroids[i]);
+                makeDebris(asteroids[i]);
+                explode(bullets[j]);
                 asteroids[i] = asteroids.back();
                 asteroids.pop_back();
                 bullets[j] = bullets.back();
@@ -157,7 +174,7 @@ void Engine::checkCollisions() {
     }
 }
 
-Engine::duration Engine::getTimeSinceStart() const {
+utils::duration Engine::getTimeSinceStart() const {
     return std::chrono::system_clock::now() - startTime;
 }
 
@@ -197,4 +214,8 @@ void Engine::clearCanary() {
     if (!asteroidsDebris.empty()) {
         asteroidsDebris.pop_back();
     }
+}
+
+void Engine::explode(const Bullet &bullet) {
+    explosions.emplace_back(bullet.getCollider().getPosition());
 }

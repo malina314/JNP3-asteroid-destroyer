@@ -96,9 +96,6 @@ void MainWindow::OnPaint() {
                     linearGradientBrush1.getBrush());
         }
 
-        // Draw explosion path
-        DrawExplosionPath(Vec2(900, 500), 0.5f);
-
         hr = pRenderTarget->EndDraw();
         if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET) {
             DiscardGraphicsResources();
@@ -238,6 +235,7 @@ void MainWindow::CloseWindow() {
 }
 
 void MainWindow::DrawExplosionPath(Vec2 position, float scale_) {
+    LOG("Scale: %f", scale_);
     D2D1::Matrix3x2F baseTranslation = D2D1::Matrix3x2F::Translation(-1515, -1050);
     D2D1::Matrix3x2F baseScale = D2D1::Matrix3x2F::Scale(0.05f, 0.05f);
     D2D1::Matrix3x2F translation = D2D1::Matrix3x2F::Translation(position.x / scale_, position.y / scale_);

@@ -9,7 +9,8 @@
 
 namespace constants {
     constexpr float FPS = 60;
-    constexpr float US_PER_FRAME = 1'000'000 / FPS;
+    constexpr float MICRO = 1'000'000; // microseconds in a second
+    constexpr float US_PER_FRAME = MICRO / FPS;
     constexpr float US_PER_FRAME_INV = 1 / US_PER_FRAME;
 
     constexpr float SPEED_FACTOR = 1.3f;
@@ -50,6 +51,9 @@ namespace constants {
     constexpr float DEBRIS_DISAPPEARING_SPEED = 0.01f;
     constexpr float DEBRIS_VISIBILITY_THRESHOLD = 0.05f;
     constexpr float DEBRIS_OPACITY = 0.5f;
+
+    constexpr float EXPLOSION_APPEAR_DURATION = 0.2f * MICRO;
+    constexpr float EXPLOSION_DISAPPEAR_DURATION = 0.8f * MICRO;
 
     constexpr int CLOSE_WINDOW_DELAY = 3000;
 

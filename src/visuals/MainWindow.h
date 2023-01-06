@@ -43,8 +43,6 @@ class MainWindow : public BaseWindow<MainWindow> {
 
     void HandleKeyUp(WPARAM key) const;
 
-    void DrawExplosionPath(Vec2 position, float scale);
-
 public:
     MainWindow() : pFactory(NULL), pRenderTarget(NULL), pBrush(NULL),
                    pWicFactory(NULL) {}
@@ -62,6 +60,8 @@ public:
     Vec2 GetWindowSize() const;
 
     void CloseWindow();
+
+    void DrawExplosionPath(Vec2 position, float scale);
 };
 
 
