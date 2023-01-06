@@ -44,6 +44,10 @@ public:
     float length() const {
         return std::sqrt(x * x + y * y);
     }
+
+    Vec2 normalized() const {
+        return *this / length();
+    }
 };
 
 

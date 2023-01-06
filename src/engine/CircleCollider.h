@@ -22,6 +22,10 @@ public:
     Vec2 getPosition() const {
         return position;
     }
+
+    Vec2 getCollisionPoint(const CircleCollider& other) const {
+        return position + (other.position - position).normalized() * radius;
+    }
 };
 
 

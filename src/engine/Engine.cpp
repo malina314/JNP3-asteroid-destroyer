@@ -151,8 +151,7 @@ void Engine::checkCollisions() {
             if (bullets[j].getCollider().collidesWith(asteroids[i].getCollider())) {
                 player->addScore(constants::SCORE_PER_ASTEROID);
                 makeDebris(asteroids[i]);
-                makeDebris(asteroids[i]);
-                explode(bullets[j].getCollider().getPosition());
+                explode(bullets[j].getCollider().getCollisionPoint(asteroids[i].getCollider()));
                 asteroids[i] = asteroids.back();
                 asteroids.pop_back();
                 bullets[j] = bullets.back();
