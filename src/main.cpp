@@ -10,11 +10,13 @@ int WINAPI wWinMain(_In_ [[maybe_unused]] HINSTANCE instance,
     MainWindow &mainWindow = Singleton<MainWindow>::getInstance();
     Engine &engine = Singleton<Engine>::getInstance();
 
-    if (!mainWindow.Create(TEXT("Asteroid Destroyer"), WS_OVERLAPPEDWINDOW)) {
-        return 0;
+    if (!mainWindow.Create(TEXT("Asteroid Destroyer"), WS_OVERLAPPEDWINDOW | WS_MAXIMIZE)) {
+        return -1;
     }
 
     ShowWindow(mainWindow.Window(), nCmdShow);
+
+    mainWindow.SwitchToFullscreen();
 
     engine.start();
 

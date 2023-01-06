@@ -58,6 +58,31 @@ public:
         return (m_hwnd ? TRUE : FALSE);
     }
 
+    void SwitchToFullscreen() {
+        HWND hwnd = m_hwnd;
+        WINDOWPLACEMENT g_wpPrev = { sizeof(g_wpPrev) };
+        DWORD dwStyle = GetWindowLong(hwnd, GWL_STYLE);
+        if (dwStyle & WS_OVERLAPPEDWINDOW) {
+            MONITORINFO mi = { sizeof(mi) };
+            if (GetWindowPlacement(hwnd, &g_wpPrev) &&
+                GetMonitorInfo(MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY), &mi)) {
+                SetWindowLong(hwnd, GWL_STYLE, dwStyle & ~WS_OVERLAPPEDWINDOW);
+                SetWindowPos(hwnd, HWND_TOP,
+                             mi.rcMonitor.left, mi.rcMonitor.top,
+                             mi.rcMonitor.right - mi.rcMonitor.left,
+                             mi.rcMonitor.bottom - mi.rcMonitor.top,
+                             SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+            }
+        } else {
+            SetWindowLong(hwnd, GWL_STYLE,
+                          dwStyle | WS_OVERLAPPEDWINDOW);
+            SetWindowPlacement(hwnd, &g_wpPrev);
+            SetWindowPos(hwnd, NULL, 0, 0, 0, 0,
+                         SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER |
+                         SWP_NOOWNERZORDER | SWP_FRAMECHANGED);
+        }
+    }
+
     HWND Window() const { return m_hwnd; }
 
 protected:
