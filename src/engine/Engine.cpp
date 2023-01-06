@@ -73,16 +73,13 @@ void Engine::update() {
         }
     }
 
-    LOG("explosions.size() = %d", explosions.size());
     // remove invisible explosions
     for (auto &explosion : explosions) {
         if (explosion.isFinished()) {
-            LOG("explosion is finished");
             explosion = explosions.back();
             explosions.pop_back();
         }
     }
-    LOG("explosions.size() = %d", explosions.size());
 
     // remove bullets that are out of bounds
     for (auto &bullet : bullets) {

@@ -29,18 +29,13 @@ public:
         }
         utils::time_point currentTime = std::chrono::system_clock::now();
         utils::duration timePassed = currentTime - startTime;
-        LOG("Time passed: %e", timePassed.count());
-        LOG("Duration: %e", duration.count());
         if (timePassed >= duration) {
             finished = true;
-            LOG("Animator finished");
             value = endValue;
             return;
         }
         auto progress = timePassed / duration;
-        LOG("Progress: %f", progress);
         value = beginValue + (endValue - beginValue) * progress;
-        LOG("Value after progress: %f", value);
     }
 
     float getValue() const {

@@ -60,7 +60,7 @@ namespace utils {
     }
 
 // todo: remove
-#define SHOULD_LOG
+//#define SHOULD_LOG
 #ifdef SHOULD_LOG
 #define LOG(...) utils::logerr(__FILE__, __func__, __LINE__ __VA_OPT__(,) __VA_ARGS__)
 #else
