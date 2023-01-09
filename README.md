@@ -2,6 +2,15 @@
 
 Projekt zaliczeniowy Direct2D z przedmiotu JNP3.
 
+## Uruchomienie
+
+Projekt posiada standardowy plik CMake. Po zbudowaniu projektu należy zadbać,
+aby powstały plik wykonywalny `asteroid-destroyer.exe` uruchamiać w tym samym
+folderze, w którym znajduje się folder `assets`. Można to osiągnąć, na przykład
+poprzez odpowiednie ustawienie "working directory" w swoim ulubinym IDE, albo
+poprzez skopiowanie folderu `assets` do folderu z plikiem wykonywalnym, lub na
+odwrót.
+
 ## Sterowanie
 
 Sterowanie odbywa się za pomocą klawiatury. Gracz porusza się za pomocą
